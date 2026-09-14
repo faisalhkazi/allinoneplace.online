@@ -1,0 +1,5 @@
+# YouTube embedded player requires a usable HTTP Referer.
+# This keeps cross-origin requests at the origin level without exposing the full page URL.
+<IfModule mod_headers.c>
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

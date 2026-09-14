@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan / EMI Calculator — Monthly payment and total interest | All in One Place</title>
+<meta name="description" content="Calculate the monthly payment (EMI), total interest, and total cost of a loan from the principal, interest rate, and term.">
+<style>
+
+:root {
+  --bg: #10131A;
+  --bg-raised: #171B24;
+  --bg-input: #0D0F15;
+  --border: #262B36;
+  --border-hover: #3A4152;
+  --text: #E7E9EE;
+  --text-soft: #8D95A6;
+  --accent: #8B5CF6;
+  --accent-dim: #6D28D9;
+  --result: #F2B84B;
+  --warn: #FF7A6E;
+  --max-w: 760px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: #A78BFA; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.4em;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.4rem; }
+p { margin: 0 0 1em; max-width: 62ch; }
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+}
+.site-header-inner, .wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.brand {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.brand .mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  flex-shrink: 0;
+}
+.brand small {
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+main { padding: 56px 24px 90px; }
+
+.hero {
+  max-width: var(--max-w);
+  margin: 0 auto 52px;
+  position: relative;
+}
+.hero p.lede {
+  color: var(--text-soft);
+  font-size: 1.08rem;
+  max-width: 50ch;
+}
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  position: relative;
+}
+.card.demo::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 10px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 45%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.field { margin-bottom: 18px; }
+.field:last-child { margin-bottom: 0; }
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 7px;
+}
+.field input, .field select {
+  width: 100%;
+  padding: 12px 13px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+}
+.field input:hover, .field select:hover { border-color: var(--border-hover); }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.toggle-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.toggle-row button {
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  padding: 9px 15px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+.toggle-row button:hover { border-color: var(--border-hover); color: var(--text); }
+.toggle-row button.active {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.result {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+}
+.result-row .label { color: var(--text-soft); font-size: 0.92rem; }
+.result-row .value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.result-row.primary {
+  padding: 10px 0;
+}
+.result-row.primary .value {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--result);
+}
+.result-row.primary .label { font-size: 1rem; color: var(--text); }
+
+.tool-grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.tool-card {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+}
+.tool-card:hover { border-color: var(--accent); }
+.tool-card .icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+.tool-card .icon svg { width: 100%; height: 100%; }
+.tool-card .name {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.tool-card .desc {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  margin-top: 5px;
+  max-width: none;
+}
+
+.section-label {
+  max-width: var(--max-w);
+  margin: 0 auto 18px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.explainer {
+  max-width: var(--max-w);
+  margin: 60px auto 0;
+}
+.explainer h2 { margin-top: 0.2em; }
+.explainer p { color: var(--text-soft); }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer a { color: var(--text-soft); }
+.site-footer a:hover { color: var(--text); }
+
+.ad-slot {
+  max-width: var(--max-w);
+  margin: 40px auto;
+  padding: 14px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.78rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 22px;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 560px) {
+  h1 { font-size: 2rem; }
+  main { padding: 40px 18px 70px; }
+  .field-row { grid-template-columns: 1fr; }
+  .tool-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body data-page="emi">
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html"><span class="mark"></span>All in One Place <small>everything, one place</small></a>
+    <nav class="site-nav">
+      <a class="home-button" href="index.html">⌂ Home</a>
+      <a href="index.html" class="current">Calculators</a>
+      <a href="resume-builder.html" class="">Resume Builder</a>
+      <a href="videos.html" class="">Videos</a>
+      <a href="credit-cards.html" class="">Credit Cards</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap"><div class="ad-slot page-ad-top ad-wide" data-ad="top"></div></div>
+  <div class="wrap">
+    <a class="back-link" href="index.html">&larr; All calculators</a>
+    <h1>Loan / EMI Calculator</h1>
+    <p class="lede">Monthly payment and total cost for a fixed-rate loan.</p>
+
+    <div class="card">
+      <div class="field">
+        <label for="principal">Loan amount</label>
+        <input type="number" id="principal" value="20000" inputmode="decimal">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="rate">Annual interest rate (%)</label>
+          <input type="number" id="rate" value="8.5" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="years">Term (years)</label>
+          <input type="number" id="years" value="5" inputmode="decimal">
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="result-row primary">
+          <span class="label">Monthly payment</span>
+          <span class="value" id="emiOut">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Total interest</span>
+          <span class="value" id="interestOut">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Total repaid</span>
+          <span class="value" id="totalOut">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-slot">Ad space — reserved for later</div>
+
+    <section class="explainer">
+      <h2>How the monthly payment is calculated</h2>
+      <p>This uses the standard amortizing-loan formula: the monthly rate is the annual rate divided by 12, and the payment is set so that equal monthly installments pay off both the principal and the interest by the end of the term. Early payments are weighted more toward interest and later ones more toward principal, even though the payment amount itself stays flat. This is an estimate — real loans may add fees, insurance, or a different compounding method, so treat this as a starting point rather than a binding quote.</p>
+    </section>
+  </div>
+<div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
+</main>
+
+<div class="wrap"><div class="ad-slot ad-wide" data-ad="middle"></div></div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span><a href="index.html">All in One Place</a> — built for quick answers</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
+<script>
+  const principal = document.getElementById('principal');
+  const rate = document.getElementById('rate');
+  const years = document.getElementById('years');
+
+  function calc() {
+    const p = parseFloat(principal.value) || 0;
+    const annualRate = parseFloat(rate.value) || 0;
+    const n = (parseFloat(years.value) || 0) * 12;
+    const r = annualRate / 100 / 12;
+
+    let emi;
+    if (r === 0) {
+      emi = n > 0 ? p / n : 0;
+    } else {
+      emi = n > 0 ? (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1) : 0;
+    }
+
+    const total = emi * n;
+    const interest = total - p;
+
+    document.getElementById('emiOut').textContent = emi ? emi.toFixed(2) : '—';
+    document.getElementById('interestOut').textContent = interest ? interest.toFixed(2) : '—';
+    document.getElementById('totalOut').textContent = total ? total.toFixed(2) : '—';
+  }
+
+  [principal, rate, years].forEach(el => el.addEventListener('input', calc));
+  calc();
+</script>
+
+</body>
+</html>

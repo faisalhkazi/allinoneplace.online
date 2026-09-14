@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATS Resume Builder — Free, ATS-friendly resume maker | All in One Place</title>
+<meta name="description" content="Build a clean, ATS-friendly resume with a live preview. No sign-up. Download as PDF or plain text.">
+<style>
+
+:root {
+  --bg: #10131A;
+  --bg-raised: #171B24;
+  --bg-input: #0D0F15;
+  --border: #262B36;
+  --border-hover: #3A4152;
+  --text: #E7E9EE;
+  --text-soft: #8D95A6;
+  --accent: #8B5CF6;
+  --accent-dim: #6D28D9;
+  --result: #F2B84B;
+  --warn: #FF7A6E;
+  --max-w: 760px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: #A78BFA; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.4em;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.4rem; }
+p { margin: 0 0 1em; max-width: 62ch; }
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+}
+.site-header-inner, .wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.brand {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.brand .mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  flex-shrink: 0;
+}
+.brand small {
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+main { padding: 56px 24px 90px; }
+
+.hero {
+  max-width: var(--max-w);
+  margin: 0 auto 52px;
+  position: relative;
+}
+.hero p.lede {
+  color: var(--text-soft);
+  font-size: 1.08rem;
+  max-width: 50ch;
+}
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  position: relative;
+}
+.card.demo::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 10px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 45%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.field { margin-bottom: 18px; }
+.field:last-child { margin-bottom: 0; }
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 7px;
+}
+.field input, .field select {
+  width: 100%;
+  padding: 12px 13px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+}
+.field input:hover, .field select:hover { border-color: var(--border-hover); }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.toggle-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.toggle-row button {
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  padding: 9px 15px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+.toggle-row button:hover { border-color: var(--border-hover); color: var(--text); }
+.toggle-row button.active {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.result {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+}
+.result-row .label { color: var(--text-soft); font-size: 0.92rem; }
+.result-row .value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.result-row.primary {
+  padding: 10px 0;
+}
+.result-row.primary .value {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--result);
+}
+.result-row.primary .label { font-size: 1rem; color: var(--text); }
+
+.tool-grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.tool-card {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+}
+.tool-card:hover { border-color: var(--accent); }
+.tool-card .icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+.tool-card .icon svg { width: 100%; height: 100%; }
+.tool-card .name {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.tool-card .desc {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  margin-top: 5px;
+  max-width: none;
+}
+
+.section-label {
+  max-width: var(--max-w);
+  margin: 0 auto 18px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.explainer {
+  max-width: var(--max-w);
+  margin: 60px auto 0;
+}
+.explainer h2 { margin-top: 0.2em; }
+.explainer p { color: var(--text-soft); }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer a { color: var(--text-soft); }
+.site-footer a:hover { color: var(--text); }
+
+.ad-slot {
+  max-width: var(--max-w);
+  margin: 40px auto;
+  padding: 14px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.78rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 22px;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 560px) {
+  h1 { font-size: 2rem; }
+  main { padding: 40px 18px 70px; }
+  .field-row { grid-template-columns: 1fr; }
+  .tool-grid { grid-template-columns: 1fr; }
+}
+
+/* --- nav --- */
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.site-nav {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+.site-nav a:hover, .site-nav a.current { color: var(--text); }
+.site-nav a.current { color: var(--accent); }
+
+/* --- calculator --- */
+.calc-display {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 18px;
+  text-align: right;
+  margin-bottom: 14px;
+}
+.calc-display .prev {
+  font-family: 'Courier New', monospace;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+.calc-display .curr {
+  font-family: 'Courier New', monospace;
+  color: var(--text);
+  font-size: 2.1rem;
+  font-weight: 500;
+  word-break: break-all;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.calc-grid button {
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  padding: 18px 0;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+}
+.calc-grid button:hover { border-color: var(--border-hover); }
+.calc-grid button.op { color: var(--accent); font-weight: 600; }
+.calc-grid button.equals { background: var(--accent); color: #FFFFFF; font-weight: 600; border-color: var(--accent); }
+.calc-grid button.equals:hover { background: #A78BFA; }
+.calc-grid button.wide { grid-column: span 2; }
+.calc-grid button.func { color: var(--result); }
+
+/* --- resume builder --- */
+.builder-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .builder-layout { grid-template-columns: 1fr 1fr; align-items: start; }
+  .max-w { max-width: none; }
+}
+.form-section {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  margin-top: 18px;
+}
+.form-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.form-section h3 {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.entry-block {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.entry-block .remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.entry-block .remove-btn:hover { color: var(--warn); }
+.add-btn {
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 16px;
+  background: none;
+  border: 1px dashed var(--border-hover);
+  border-radius: 6px;
+  color: var(--accent);
+  cursor: pointer;
+  width: 100%;
+}
+.add-btn:hover { border-color: var(--accent); }
+textarea {
+  width: 100%;
+  padding: 12px 13px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  resize: vertical;
+  min-height: 70px;
+}
+.resume-preview-wrap {
+  position: sticky;
+  top: 20px;
+}
+.resume-preview {
+  background: #FFFFFF;
+  color: #1A1A1A;
+  border-radius: 10px;
+  padding: 40px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  min-height: 400px;
+}
+.resume-preview h1 { font-family: 'Georgia', serif; color: #111; font-size: 1.5rem; margin-bottom: 2px; }
+.resume-preview .contact-line { color: #444; font-size: 0.85rem; margin-bottom: 16px; }
+.resume-preview h2 {
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #999;
+  padding-bottom: 3px;
+  margin: 18px 0 8px;
+  color: #111;
+}
+.resume-preview .entry-title { font-weight: bold; color: #111; }
+.resume-preview .entry-meta { color: #555; font-size: 0.84rem; margin-bottom: 4px; }
+.resume-preview ul { margin: 4px 0 10px 18px; padding: 0; }
+.resume-preview li { margin-bottom: 3px; }
+.btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.btn {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+}
+.btn.primary { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+.btn.primary:hover { background: #A78BFA; }
+.btn:hover { border-color: var(--border-hover); }
+
+@media print {
+  body * { visibility: hidden; }
+  .resume-preview, .resume-preview * { visibility: visible; }
+  .resume-preview { position: absolute; top: 0; left: 0; width: 100%; border-radius: 0; padding: 20px; }
+}
+
+/* --- video grid --- */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.video-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-raised); }
+.video-item .frame-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-item iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-item .video-title { padding: 12px 14px; font-size: 0.92rem; color: var(--text); }
+.channel-cta {
+  max-width: var(--max-w);
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* --- credit card grid --- */
+.disclosure {
+  max-width: var(--max-w);
+  margin: 0 auto 32px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.credit-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  background: var(--bg-raised);
+}
+.credit-card .card-name { font-family: 'Trebuchet MS', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.credit-card .card-tag { color: var(--result); font-size: 0.85rem; margin-bottom: 10px; }
+.credit-card ul { margin: 10px 0; padding-left: 18px; color: var(--text-soft); font-size: 0.92rem; }
+.credit-card li { margin-bottom: 4px; }
+.credit-card .fine-print { color: var(--text-soft); font-size: 0.78rem; margin-top: 10px; }
+.credit-card .apply-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 6px;
+}
+.credit-card .apply-btn:hover { background: #A78BFA; color: #FFFFFF; text-decoration: none; }
+
+@media (max-width: 640px) {
+  .video-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body data-page="resume">
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html"><span class="mark"></span>All in One Place <small>everything, one place</small></a>
+    <nav class="site-nav">
+      <a class="home-button" href="index.html">⌂ Home</a>
+      <a href="index.html" class="">Calculators</a>
+      <a href="resume-builder.html" class="current">Resume Builder</a>
+      <a href="videos.html" class="">Videos</a>
+      <a href="credit-cards.html" class="">Credit Cards</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap"><div class="ad-slot page-ad-top ad-wide" data-ad="top"></div></div>
+  <div class="wrap" style="max-width: 1100px;">
+    <a class="back-link" href="index.html">&larr; Back home</a>
+    <h1>ATS Resume Builder</h1>
+    <p class="lede">Fill in the fields on the left — the preview on the right updates as you type. The layout is deliberately plain: single column, no tables, no graphics, no columns — the format applicant tracking systems parse most reliably.</p>
+
+    <div class="builder-layout">
+      <div>
+        <div class="card">
+          <div class="form-section">
+            <h3>Contact details</h3>
+            <div class="field"><label for="fName">Full name</label><input id="fName" value="Jordan Ellis"></div>
+            <div class="field-row">
+              <div class="field"><label for="fEmail">Email</label><input id="fEmail" value="jordan.ellis@email.com"></div>
+              <div class="field"><label for="fPhone">Phone</label><input id="fPhone" value="+1 555 020 3344"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="fLocation">Location</label><input id="fLocation" value="Mumbai, India"></div>
+              <div class="field"><label for="fLink">LinkedIn / portfolio URL</label><input id="fLink" value="linkedin.com/in/jordanellis"></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Professional summary</h3>
+            <div class="field">
+              <textarea id="fSummary" rows="3">Operations coordinator with 4+ years streamlining logistics and vendor workflows for mid-size retail teams. Reduced fulfillment turnaround by 22% through process redesign.</textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Work experience</h3>
+            <div id="expList"></div>
+            <button class="add-btn" id="addExp" type="button">+ Add another role</button>
+          </div>
+
+          <div class="form-section">
+            <h3>Education</h3>
+            <div id="eduList"></div>
+            <button class="add-btn" id="addEdu" type="button">+ Add another entry</button>
+          </div>
+
+          <div class="form-section">
+            <h3>Skills</h3>
+            <div class="field">
+              <label for="fSkills">Comma-separated</label>
+              <input id="fSkills" value="Inventory management, Vendor negotiation, Excel/Sheets, SAP, Process improvement, Team leadership">
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn primary" id="downloadPdf" type="button">Download as PDF</button>
+            <button class="btn" id="downloadTxt" type="button">Download as .txt</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-preview-wrap">
+        <div class="resume-preview" id="preview"></div>
+      </div>
+    </div>
+
+    <section class="explainer">
+      <h2>Why plain formatting matters</h2>
+      <p>Applicant tracking systems parse resumes as text before a person ever sees them — multi-column layouts, text boxes, icons, and tables often scramble or drop content entirely during that parsing step. A single-column layout with standard section headings (Experience, Education, Skills) and plain bullet points, exactly what this tool produces, is the format that parses most reliably across the major systems.</p>
+    </section>
+  </div>
+<div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
+</main>
+
+<div class="wrap"><div class="ad-slot ad-wide" data-ad="middle"></div></div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span><a href="index.html">All in One Place</a> — built for quick answers</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
+
+<script>
+  const expList = document.getElementById('expList');
+  const eduList = document.getElementById('eduList');
+  const preview = document.getElementById('preview');
+
+  function expBlock(company, role, dates, bullets) {
+    const div = document.createElement('div');
+    div.className = 'entry-block';
+    div.innerHTML = `
+      <button type="button" class="remove-btn">Remove</button>
+      <div class="field-row">
+        <div class="field"><label>Company</label><input class="exp-company" value="${company}"></div>
+        <div class="field"><label>Role</label><input class="exp-role" value="${role}"></div>
+      </div>
+      <div class="field"><label>Dates</label><input class="exp-dates" value="${dates}"></div>
+      <div class="field"><label>Bullet points (one per line)</label><textarea class="exp-bullets" rows="3">${bullets}</textarea></div>
+    `;
+    div.querySelector('.remove-btn').addEventListener('click', () => { div.remove(); render(); });
+    div.querySelectorAll('input, textarea').forEach(el => el.addEventListener('input', render));
+    return div;
+  }
+
+  function eduBlock(school, degree, dates) {
+    const div = document.createElement('div');
+    div.className = 'entry-block';
+    div.innerHTML = `
+      <button type="button" class="remove-btn">Remove</button>
+      <div class="field"><label>School</label><input class="edu-school" value="${school}"></div>
+      <div class="field-row">
+        <div class="field"><label>Degree</label><input class="edu-degree" value="${degree}"></div>
+        <div class="field"><label>Dates</label><input class="edu-dates" value="${dates}"></div>
+      </div>
+    `;
+    div.querySelector('.remove-btn').addEventListener('click', () => { div.remove(); render(); });
+    div.querySelectorAll('input').forEach(el => el.addEventListener('input', render));
+    return div;
+  }
+
+  document.getElementById('addExp').addEventListener('click', () => {
+    expList.appendChild(expBlock('', '', '', ''));
+    render();
+  });
+  document.getElementById('addEdu').addEventListener('click', () => {
+    eduList.appendChild(eduBlock('', '', ''));
+    render();
+  });
+
+  function esc(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function render() {
+    const name = document.getElementById('fName').value;
+    const email = document.getElementById('fEmail').value;
+    const phone = document.getElementById('fPhone').value;
+    const location = document.getElementById('fLocation').value;
+    const link = document.getElementById('fLink').value;
+    const summary = document.getElementById('fSummary').value;
+    const skills = document.getElementById('fSkills').value;
+
+    const contactParts = [email, phone, location, link].filter(Boolean);
+
+    let expHtml = '';
+    expList.querySelectorAll('.entry-block').forEach(block => {
+      const company = block.querySelector('.exp-company').value;
+      const role = block.querySelector('.exp-role').value;
+      const dates = block.querySelector('.exp-dates').value;
+      const bullets = block.querySelector('.exp-bullets').value.split('\n').filter(b => b.trim());
+      if (!company && !role) return;
+      expHtml += `<div class="entry-title">${esc(role)}${role && company ? ' — ' : ''}${esc(company)}</div>`;
+      expHtml += `<div class="entry-meta">${esc(dates)}</div>`;
+      if (bullets.length) {
+        expHtml += '<ul>' + bullets.map(b => `<li>${esc(b.trim())}</li>`).join('') + '</ul>';
+      }
+    });
+
+    let eduHtml = '';
+    eduList.querySelectorAll('.entry-block').forEach(block => {
+      const school = block.querySelector('.edu-school').value;
+      const degree = block.querySelector('.edu-degree').value;
+      const dates = block.querySelector('.edu-dates').value;
+      if (!school && !degree) return;
+      eduHtml += `<div class="entry-title">${esc(degree)}</div>`;
+      eduHtml += `<div class="entry-meta">${esc(school)}${school && dates ? ' — ' : ''}${esc(dates)}</div>`;
+    });
+
+    preview.innerHTML = `
+      <h1>${esc(name)}</h1>
+      <div class="contact-line">${contactParts.map(esc).join(' · ')}</div>
+      ${summary ? `<h2>Summary</h2><p>${esc(summary)}</p>` : ''}
+      ${expHtml ? `<h2>Experience</h2>${expHtml}` : ''}
+      ${eduHtml ? `<h2>Education</h2>${eduHtml}` : ''}
+      ${skills ? `<h2>Skills</h2><p>${esc(skills)}</p>` : ''}
+    `;
+  }
+
+  document.querySelectorAll('#fName, #fEmail, #fPhone, #fLocation, #fLink, #fSummary, #fSkills')
+    .forEach(el => el.addEventListener('input', render));
+
+  document.getElementById('downloadPdf').addEventListener('click', () => window.print());
+
+  document.getElementById('downloadTxt').addEventListener('click', () => {
+    const text = preview.innerText;
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (document.getElementById('fName').value || 'resume').replace(/\s+/g, '_') + '.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // seed with example entries
+  expList.appendChild(expBlock('Northgate Retail Group', 'Operations Coordinator', 'Jun 2022 — Present',
+    'Redesigned vendor intake process, cutting average turnaround from 9 days to 7\nManaged relationships with 14 regional suppliers\nTrained 3 new hires on inventory systems'));
+  expList.appendChild(expBlock('Harbor Logistics', 'Warehouse Associate', 'Jan 2020 — May 2022',
+    'Processed an average of 300 shipments per week with 99.6% accuracy\nFlagged a labeling error pattern that reduced returns by 11%'));
+  eduList.appendChild(eduBlock('University of Mumbai', 'B.Com, Business Administration', '2016 — 2019'));
+
+  render();
+</script>
+</body>
+</html>

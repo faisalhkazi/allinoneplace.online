@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator | All in One Place</title>
+<meta name="description" content="A powerful scientific calculator with trigonometry, logarithms, powers, factorials, parentheses, constants, history and keyboard support.">
+<style>
+
+:root{
+  --bg:#10131a; --bg2:#171b24; --key:#282d39; --key-hover:#303645; --border:#303643;
+  --text:#f1f3f7; --muted:#9aa2b1; --accent:#3478f6; --accent-hover:#4c88f7;
+  --warm:#f2b84b; --danger:#ff7a6e; --max-w:1100px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;font-size:16px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:'Trebuchet MS',sans-serif;line-height:1.15;margin:0 0 .45em}
+.site-header{border-bottom:1px solid var(--border);padding:18px 24px;background:rgba(16,19,26,.82);backdrop-filter:blur(10px)}
+.site-header-inner,.wrap{max-width:var(--max-w);margin:0 auto}
+.site-header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:center;gap:9px;font-family:'Trebuchet MS';font-weight:600}
+.brand .mark{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#3478f6,#255dcc)}
+.brand small{font:500 .72rem Inter;color:var(--muted)}
+.site-nav{display:flex;gap:20px;flex-wrap:wrap}.site-nav a{font-size:.86rem;color:var(--muted)}.site-nav a:hover,.site-nav a.current{color:var(--text)}.site-nav a.current{color:#7eabff}
+main{padding:32px 20px 80px}.back-link{display:inline-block;margin-bottom:18px;color:var(--muted);font-size:.88rem}.back-link:hover{color:var(--text)}
+.page-heading{margin-bottom:22px}.page-heading h1{font-size:2rem}.page-heading p{margin:0;color:var(--muted);max-width:65ch}
+
+/* Ads are kept in the shared project and remain editable from site.js. */
+.ad-slot{width:100%;min-height:110px;margin:24px auto;border:1px dashed rgba(154,162,177,.42);border-radius:14px;background:rgba(13,15,21,.76);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.ad-slot .ad-frame{width:100%;min-height:110px;border:0;display:block}.ad-slot .ad-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:var(--muted);text-align:center;padding:20px}.ad-slot .ad-label{font:600 11px 'Courier New';letter-spacing:.12em;text-transform:uppercase}.ad-slot .ad-open{position:absolute;right:10px;top:8px;z-index:3;font-size:12px;padding:3px 8px;border:1px solid var(--border);border-radius:999px;background:rgba(16,19,26,.92);color:var(--muted)}
+
+.calculator-shell{max-width:760px;margin:0 auto}.calculator-card{background:rgba(31,35,45,.94);border:1px solid #373c48;border-radius:15px;padding:14px 12px 10px;box-shadow:0 18px 55px rgba(0,0,0,.22)}
+.calc-display{position:relative;min-height:88px;padding:13px 16px 8px;margin-bottom:10px;border:1px solid #414652;border-radius:15px;background:#20232a;display:flex;flex-direction:column;justify-content:flex-end;text-align:right;overflow:hidden}
+.history-btn{position:absolute;left:12px;top:10px;border:0;background:none;color:#a9afba;font-size:20px;cursor:pointer;padding:6px;border-radius:8px}.history-btn:hover{background:#2b2f38;color:#fff}
+.calc-expression{font:500 1rem 'Courier New';color:#8f97a5;min-height:22px;white-space:nowrap;overflow:auto;text-overflow:clip;padding-left:30px}.calc-current{font:500 2rem 'Courier New';color:#fff;min-height:42px;white-space:nowrap;overflow:auto;text-overflow:clip}
+.calc-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.calc-grid button{min-height:45px;border:0;border-radius:24px;background:var(--key);color:#f0f2f6;font:500 .92rem Inter;cursor:pointer;transition:background .12s,transform .05s}.calc-grid button:hover{background:var(--key-hover)}.calc-grid button:active{transform:scale(.98)}
+.calc-grid .mode{grid-column:span 2}.calc-grid .mode.active{color:#fff}.calc-grid .mode span{opacity:.9}.calc-grid .mode .selected{color:#8eb4ff}.calc-grid .function{font-size:.88rem}.calc-grid .operator{font-size:1.12rem}.calc-grid .accent{background:var(--accent);color:#fff}.calc-grid .accent:hover{background:var(--accent-hover)}.calc-grid .warm{color:#f3c66e}.calc-grid .inv-on{background:#3a4050;color:#9fc0ff}
+
+.maths-solver{margin:14px 0 0;border-top:1px solid #3b404b;padding-top:10px}.solver-toggle{width:min(370px,80%);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;border:0;border-radius:24px;background:#292d36;color:#f2f4f8;padding:10px 18px;font:600 .9rem Inter;cursor:pointer}.solver-toggle span{font-size:1.2rem;color:#9ba2ae}.solver-panel{display:none;margin-top:12px;border:1px solid var(--border);border-radius:12px;background:#1b1f27;padding:14px}.solver-panel.open{display:block}.solver-row{display:flex;gap:8px}.solver-row input{flex:1;min-width:0;background:#10131a;border:1px solid #3b404b;border-radius:9px;padding:11px 12px;color:#fff;font:500 .95rem 'Courier New'}.solver-row button{border:0;border-radius:9px;background:var(--accent);color:#fff;padding:0 15px;font-weight:600;cursor:pointer}.solver-help{margin:9px 0 0;color:var(--muted);font-size:.78rem}.solver-result{margin-top:10px;color:#f3c66e;font:500 1rem 'Courier New';min-height:1.3em}
+
+.history-panel{display:none;margin-top:12px;border:1px solid var(--border);border-radius:12px;background:#1b1f27;padding:12px}.history-panel.open{display:block}.history-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.8rem;margin-bottom:6px}.history-clear{border:0;background:none;color:#9ca4b2;cursor:pointer}.history-list{list-style:none;margin:0;padding:0;display:grid;gap:5px}.history-list button{width:100%;border:0;border-radius:8px;background:#232731;color:#e9ebef;padding:9px 10px;text-align:right;font:500 .84rem 'Courier New';cursor:pointer}.history-list button:hover{background:#2c313d}.empty-history{color:#747c8b;font-size:.82rem;padding:10px}
+
+.about{max-width:760px;margin:42px auto 0;color:var(--muted)}.about h2{color:var(--text);font-size:1.2rem}.about p{max-width:70ch}.feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 25px;padding:0;margin:12px 0 0;list-style:none}.feature-list li{font-size:.87rem}.feature-list li::before{content:'✓';color:#80aaff;margin-right:8px}
+.site-footer{border-top:1px solid var(--border);padding:25px 20px;color:var(--muted);font-size:.82rem}.site-footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+body{position:relative;isolation:isolate}body::before{content:"";position:fixed;inset:0;z-index:-3;background-image:url("bg-calculator.svg");background-repeat:no-repeat;background-position:center;background-size:min(900px,80vw) auto;opacity:.11;pointer-events:none}body::after{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% 25%,rgba(16,19,26,.28),rgba(16,19,26,.95) 75%);pointer-events:none}
+@media(max-width:650px){main{padding:24px 12px 60px}.site-header{padding:15px}.brand small{display:none}.site-nav{gap:12px}.calc-grid{gap:5px}.calc-grid button{min-height:43px;font-size:.82rem}.calc-grid .function{font-size:.77rem}.calc-display{min-height:84px}.calc-current{font-size:1.65rem}.feature-list{grid-template-columns:1fr}.calculator-card{padding:10px 8px 8px}.solver-row{flex-direction:column}.solver-row button{min-height:42px}}
+@media(max-width:390px){.calc-grid{gap:4px}.calc-grid button{min-height:40px;border-radius:20px;font-size:.76rem}.calc-grid .function{font-size:.7rem}.calc-current{font-size:1.45rem}}
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body data-page="calculator">
+<header class="site-header"><div class="site-header-inner">
+  <a class="brand" href="index.html"><span class="mark"></span>All in One Place <small>everything, one place</small></a>
+  <nav class="site-nav">
+      <a class="home-button" href="index.html">⌂ Home</a><a href="index.html" class="current">Calculators</a><a href="resume-builder.html">Resume Builder</a><a href="videos.html">Videos</a><a href="credit-cards.html">Credit Cards</a></nav>
+</div></header>
+
+<main>
+  <div class="wrap"><div class="ad-slot page-ad-top ad-wide" data-ad="top"></div></div>
+  <div class="calculator-shell">
+    <a class="back-link" href="index.html">&larr; All calculators</a>
+    <div class="page-heading"><h1>Scientific Calculator</h1><p>Advanced calculation with trigonometry, logarithms, powers, factorials, constants, percentages, history and keyboard support.</p></div>
+
+    <section class="calculator-card" aria-label="Scientific calculator">
+      <div class="calc-display" aria-live="polite">
+        <button class="history-btn" id="historyBtn" type="button" aria-label="Show calculation history" title="History">↶</button>
+        <div class="calc-expression" id="calcExpression">&nbsp;</div>
+        <div class="calc-current" id="calcCurrent">0</div>
+      </div>
+
+      <div class="calc-grid" id="calcGrid">
+        <button class="mode" id="angleBtn" type="button" data-action="angle"><span class="selected" id="degText">Deg</span><span style="padding:0 12px;color:#596171">|</span><span id="radText">Rad</span></button>
+        <button class="function warm" data-action="factorial" type="button">x!</button>
+        <button class="function" data-action="insert" data-value="(" type="button">(</button>
+        <button class="function" data-action="insert" data-value=")" type="button">)</button>
+        <button class="function warm" data-action="percent" type="button">%</button>
+        <button class="function warm" data-action="clear" type="button">AC</button>
+
+        <button class="function" id="invBtn" data-action="inv" type="button">Inv</button>
+        <button class="function" data-action="function" data-value="sin" type="button">sin</button>
+        <button class="function" data-action="function" data-value="ln" type="button">ln</button>
+        <button data-action="digit" data-value="7" type="button">7</button><button data-action="digit" data-value="8" type="button">8</button><button data-action="digit" data-value="9" type="button">9</button>
+        <button class="operator" data-action="operator" data-value="/" type="button">÷</button>
+
+        <button class="function" data-action="constant" data-value="pi" type="button">π</button>
+        <button class="function" data-action="function" data-value="cos" type="button">cos</button>
+        <button class="function" data-action="function" data-value="log" type="button">log</button>
+        <button data-action="digit" data-value="4" type="button">4</button><button data-action="digit" data-value="5" type="button">5</button><button data-action="digit" data-value="6" type="button">6</button>
+        <button class="operator" data-action="operator" data-value="*" type="button">×</button>
+
+        <button class="function" data-action="constant" data-value="e" type="button">e</button>
+        <button class="function" data-action="function" data-value="tan" type="button">tan</button>
+        <button class="function" data-action="function" data-value="sqrt" type="button">√</button>
+        <button data-action="digit" data-value="1" type="button">1</button><button data-action="digit" data-value="2" type="button">2</button><button data-action="digit" data-value="3" type="button">3</button>
+        <button class="operator" data-action="operator" data-value="-" type="button">−</button>
+
+        <button class="function" data-action="ans" type="button">Ans</button>
+        <button class="function" data-action="exp" type="button">EXP</button>
+        <button class="function" data-action="power" type="button">xʸ</button>
+        <button data-action="digit" data-value="0" type="button">0</button><button data-action="decimal" type="button">.</button>
+        <button class="accent operator" data-action="equals" type="button">=</button>
+        <button class="operator" data-action="operator" data-value="+" type="button">+</button>
+      </div>
+
+      <div class="history-panel" id="historyPanel">
+        <div class="history-head"><span>Calculation history</span><button class="history-clear" id="historyClear" type="button">Clear</button></div>
+        <ul class="history-list" id="historyList"></ul>
+      </div>
+
+      <div class="maths-solver">
+        <button class="solver-toggle" id="solverToggle" type="button">Maths solver <span>›</span></button>
+        <div class="solver-panel" id="solverPanel">
+          <div class="solver-row"><input id="solverInput" type="text" placeholder="Example: 2(5+3)^2 or sin(30)" autocomplete="off"><button id="solverButton" type="button">Solve</button></div>
+          <div class="solver-help">Use the same scientific syntax as the calculator. Angle mode applies to sin, cos and tan.</div>
+          <div class="solver-result" id="solverResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap"><div class="ad-slot" data-ad="middle"></div></div>
+
+  <section class="about"><h2>Scientific calculator features</h2><p>This calculator is designed to behave like a modern scientific calculator while staying fast and easy to use on desktop and mobile.</p><ul class="feature-list"><li>Degree / Radian angle modes</li><li>Inverse trigonometric functions</li><li>sin, cos, tan, ln and log</li><li>Square root and arbitrary powers</li><li>π and e constants</li><li>Factorial and percentage</li><li>Parentheses and chained calculations</li><li>EXP scientific notation entry</li><li>Ans previous-result memory</li><li>Calculation history</li><li>Keyboard support</li><li>Built-in maths solver</li></ul></section>
+
+  <div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
+</main>
+
+<footer class="site-footer"><div class="wrap"><span><a href="index.html">All in One Place</a> — built for quick answers</span><span>&copy; 2026</span></div></footer>
+
+<script>
+(function(){
+  'use strict';
+  const currentEl=document.getElementById('calcCurrent'), expressionEl=document.getElementById('calcExpression');
+  const grid=document.getElementById('calcGrid'), angleBtn=document.getElementById('angleBtn'), invBtn=document.getElementById('invBtn');
+  const historyBtn=document.getElementById('historyBtn'), historyPanel=document.getElementById('historyPanel'), historyList=document.getElementById('historyList'), historyClear=document.getElementById('historyClear');
+  const solverToggle=document.getElementById('solverToggle'), solverPanel=document.getElementById('solverPanel'), solverInput=document.getElementById('solverInput'), solverButton=document.getElementById('solverButton'), solverResult=document.getElementById('solverResult');
+
+  let expr=''; let angleMode='DEG'; let inverse=false; let ans=0; let justEvaluated=false; const history=[];
+  const MAX_EXPR=180;
+  const fnNames=new Set(['sin','cos','tan','asin','acos','atan','ln','log','sqrt']);
+
+  function formatNumber(n){
+    if(!Number.isFinite(n)) throw new Error('Result is not finite');
+    if(Math.abs(n)<1e-12) n=0;
+    const rounded=Math.round((n+Number.EPSILON)*1e12)/1e12;
+    const s=String(rounded);
+    return s.length<=16?s:Number(rounded).toExponential(10).replace(/\.0+e/,'e').replace(/(\.\d*?)0+e/,'$1e');
+  }
+  function display(){
+    expressionEl.textContent=expr||'\u00a0';
+    currentEl.textContent=expr?pretty(expr):'0';
+  }
+  function pretty(s){return s.replace(/sqrt/g,'√').replace(/\*/g,'×').replace(/\//g,'÷').replace(/asin/g,inverse?'sin⁻¹':'sin⁻¹').replace(/acos/g,'cos⁻¹').replace(/atan/g,'tan⁻¹');}
+  function setExpr(s){if(s.length<=MAX_EXPR){expr=s;display();}}
+  function append(s){
+    if(justEvaluated && /^(?:\d|pi|e|\(|[a-z])/.test(s)) expr='';
+    justEvaluated=false;
+    if(expr.length+s.length<=MAX_EXPR) expr+=s;
+    display();
+  }
+  function needsMulBefore(value){return expr && /[0-9)e]$|pi$/.test(expr) && /^(?:\d|pi|e|\(|[a-z])/.test(value)}
+  function appendSmart(value){append(needsMulBefore(value)?'*'+value:value)}
+  function clear(){expr='';justEvaluated=false;display();}
+  function backspace(){if(justEvaluated){clear();return} expr=expr.slice(0,-1);display();}
+
+  function factorial(n){
+    if(!Number.isFinite(n)||n<0||Math.floor(n)!==n||n>170) throw new Error('Factorial needs a whole number from 0 to 170');
+    let r=1; for(let i=2;i<=n;i++) r*=i; return r;
+  }
+  function tokenize(input){
+    const out=[]; let i=0;
+    input=input.replace(/\s+/g,'');
+    while(i<input.length){
+      const c=input[i];
+      if(/[0-9.]/.test(c)){
+        const m=input.slice(i).match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/i); if(!m) throw new Error('Invalid number');
+        out.push({type:'num',value:Number(m[0])}); i+=m[0].length; continue;
+      }
+      if(/[a-z]/i.test(c)){
+        const m=input.slice(i).match(/^[a-z]+/i)[0].toLowerCase();
+        if(m==='pi'||m==='e'||m==='ans') out.push({type:'const',value:m});
+        else if(fnNames.has(m)) out.push({type:'fn',value:m});
+        else throw new Error('Unknown function: '+m);
+        i+=m.length; continue;
+      }
+      if('+-*/^()%!'.includes(c)){out.push({type:'op',value:c});i++;continue;}
+      throw new Error('Invalid character: '+c);
+    }
+    return out;
+  }
+  function evaluate(input){
+    const t=tokenize(input); let p=0;
+    function peek(v){return t[p]&&(!v||t[p].value===v)}
+    function eat(v){if(peek(v)){p++;return true}return false}
+    function primary(){
+      if(eat('(')){const v=additive();if(!eat(')'))throw new Error('Missing )');return v}
+      if(t[p]?.type==='num'){return t[p++].value}
+      if(t[p]?.type==='const'){const n=t[p++].value;return n==='pi'?Math.PI:n==='e'?Math.E:ans}
+      if(t[p]?.type==='fn'){const name=t[p++].value; const v=unary(); return applyFn(name,v)}
+      throw new Error('Expected a number');
+    }
+    function postfix(){let v=primary();while(peek('!')||peek('%')){const op=t[p++].value;if(op==='!')v=factorial(v);else v=v/100;}return v}
+    function unary(){if(eat('+'))return unary();if(eat('-'))return -unary();return postfix()}
+    function power(){let a=unary();if(eat('^'))a=Math.pow(a,power());return a}
+    function multiplicative(){let v=power();while(peek('*')||peek('/')){const op=t[p++].value;const b=power();if(op==='/'&&b===0)throw new Error('Cannot divide by zero');v=op==='*'?v*b:v/b;}return v}
+    function additive(){let v=multiplicative();while(peek('+')||peek('-')){const op=t[p++].value;const b=multiplicative();v=op==='+'?v+b:v-b;}return v}
+    function applyFn(name,v){
+      const rad=(x)=>angleMode==='DEG'?x*Math.PI/180:x; const deg=(x)=>angleMode==='DEG'?x*180/Math.PI:x;
+      let r;
+      switch(name){
+        case 'sin':r=Math.sin(rad(v));break; case 'cos':r=Math.cos(rad(v));break; case 'tan':r=Math.tan(rad(v));break;
+        case 'asin':r=deg(Math.asin(v));break; case 'acos':r=deg(Math.acos(v));break; case 'atan':r=deg(Math.atan(v));break;
+        case 'ln':if(v<=0)throw new Error('ln needs a positive number');r=Math.log(v);break;
+        case 'log':if(v<=0)throw new Error('log needs a positive number');r=Math.log10(v);break;
+        case 'sqrt':if(v<0)throw new Error('√ needs a non-negative number');r=Math.sqrt(v);break;
+        default:throw new Error('Unknown function');
+      }
+      return r;
+    }
+    const value=additive(); if(p<t.length)throw new Error('Unexpected '+t[p].value); return value;
+  }
+  function evalAndShow(){
+    if(!expr)return;
+    try{const original=expr;const result=evaluate(expr);ans=result;expr=formatNumber(result);justEvaluated=true;addHistory(original,expr);display();}
+    catch(e){currentEl.textContent=e.message;expressionEl.textContent=expr;}
+  }
+  function addHistory(a,b){history.unshift({a,b});if(history.length>12)history.pop();renderHistory();}
+  function renderHistory(){historyList.innerHTML='';if(!history.length){historyList.innerHTML='<li class="empty-history">No calculations yet.</li>';return}history.forEach((h,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.type='button';b.textContent=h.a+' = '+h.b;b.addEventListener('click',()=>{expr=h.b;justEvaluated=true;display();historyPanel.classList.remove('open')});li.appendChild(b);historyList.appendChild(li)})}
+
+  grid.addEventListener('click',(e)=>{
+    const b=e.target.closest('button'); if(!b)return; const a=b.dataset.action,v=b.dataset.value;
+    try{
+      if(a==='digit'){appendSmart(v);return}
+      if(a==='decimal'){if(justEvaluated)expr='';justEvaluated=false; const tail=expr.split(/[+\-*/^()%]/).pop(); if(!tail.includes('.'))append(tail?' .'.trim(): '0.'); return}
+      if(a==='operator'){if(!expr)return;if(/[+\-*/^]$/.test(expr))expr=expr.slice(0,-1)+v;else{expr+=v;justEvaluated=false}display();return}
+      if(a==='equals'){evalAndShow();return}
+      if(a==='clear'){clear();return}
+      if(a==='backspace'){backspace();return}
+      if(a==='percent'){append('%');return}
+      if(a==='factorial'){append('!');return}
+      if(a==='insert'){appendSmart(v);return}
+      if(a==='constant'){appendSmart(v);return}
+      if(a==='ans'){appendSmart('ans');return}
+      if(a==='function'){
+        const fn=inverse?(v==='sin'?'asin':v==='cos'?'acos':v==='tan'?'atan':v):v;appendSmart(fn+'(');return;
+      }
+      if(a==='power'){append('^');return}
+      if(a==='exp'){if(/[0-9)]$/.test(expr))append('e');else append('1e');return}
+      if(a==='inv'){inverse=!inverse;invBtn.classList.toggle('inv-on',inverse);return}
+      if(a==='angle'){angleMode=angleMode==='DEG'?'RAD':'DEG';document.getElementById('degText').classList.toggle('selected',angleMode==='DEG');document.getElementById('radText').classList.toggle('selected',angleMode==='RAD');return}
+    }catch(err){currentEl.textContent=err.message;}
+  });
+
+  document.addEventListener('keydown',(e)=>{
+    if(['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+    if(/^[0-9]$/.test(e.key)){e.preventDefault();appendSmart(e.key)}
+    else if(e.key==='.'){e.preventDefault();const tail=expr.split(/[+\-*/^()%]/).pop();if(!tail.includes('.'))append(tail?' .'.trim():'0.')}
+    else if(['+','-','*','/','^'].includes(e.key)){e.preventDefault();if(expr&&/[+\-*/^]$/.test(expr))expr=expr.slice(0,-1)+e.key;else if(expr)expr+=e.key;display()}
+    else if(e.key==='Enter'||e.key==='='){e.preventDefault();evalAndShow()}
+    else if(e.key==='Backspace'){e.preventDefault();backspace()}
+    else if(e.key==='Escape'||e.key.toLowerCase()==='c'){e.preventDefault();clear()}
+    else if(e.key==='('||e.key===')'){e.preventDefault();appendSmart(e.key)}
+    else if(e.key==='%'){e.preventDefault();append('%')}
+  });
+
+  historyBtn.addEventListener('click',()=>historyPanel.classList.toggle('open')); historyClear.addEventListener('click',()=>{history.length=0;renderHistory()}); renderHistory();
+  solverToggle.addEventListener('click',()=>solverPanel.classList.toggle('open'));
+  function solve(){const q=solverInput.value.trim();if(!q){solverResult.textContent='Enter an expression to solve.';return}try{solverResult.textContent='= '+formatNumber(evaluate(q))}catch(e){solverResult.textContent=e.message}}
+  solverButton.addEventListener('click',solve); solverInput.addEventListener('keydown',e=>{if(e.key==='Enter')solve()});
+  display();
+})();
+</script>
+</body>
+</html>

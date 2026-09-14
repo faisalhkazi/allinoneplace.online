@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Picks — Compare cards | All in One Place</title>
+<meta name="description" content="A comparison of credit cards we recommend, with current offers and rewards.">
+<style>
+
+:root {
+  --bg: #10131A;
+  --bg-raised: #171B24;
+  --bg-input: #0D0F15;
+  --border: #262B36;
+  --border-hover: #3A4152;
+  --text: #E7E9EE;
+  --text-soft: #8D95A6;
+  --accent: #8B5CF6;
+  --accent-dim: #6D28D9;
+  --result: #F2B84B;
+  --warn: #FF7A6E;
+  --max-w: 760px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: #A78BFA; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.4em;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.4rem; }
+p { margin: 0 0 1em; max-width: 62ch; }
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+}
+.site-header-inner, .wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.brand {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.brand .mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  flex-shrink: 0;
+}
+.brand small {
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+main { padding: 56px 24px 90px; }
+
+.hero {
+  max-width: var(--max-w);
+  margin: 0 auto 52px;
+  position: relative;
+}
+.hero p.lede {
+  color: var(--text-soft);
+  font-size: 1.08rem;
+  max-width: 50ch;
+}
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  position: relative;
+}
+.card.demo::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 10px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 45%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.field { margin-bottom: 18px; }
+.field:last-child { margin-bottom: 0; }
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 7px;
+}
+.field input, .field select {
+  width: 100%;
+  padding: 12px 13px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+}
+.field input:hover, .field select:hover { border-color: var(--border-hover); }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.toggle-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.toggle-row button {
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  padding: 9px 15px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+.toggle-row button:hover { border-color: var(--border-hover); color: var(--text); }
+.toggle-row button.active {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.result {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+}
+.result-row .label { color: var(--text-soft); font-size: 0.92rem; }
+.result-row .value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.result-row.primary {
+  padding: 10px 0;
+}
+.result-row.primary .value {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--result);
+}
+.result-row.primary .label { font-size: 1rem; color: var(--text); }
+
+.tool-grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.tool-card {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+}
+.tool-card:hover { border-color: var(--accent); }
+.tool-card .icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+.tool-card .icon svg { width: 100%; height: 100%; }
+.tool-card .name {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.tool-card .desc {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  margin-top: 5px;
+  max-width: none;
+}
+
+.section-label {
+  max-width: var(--max-w);
+  margin: 0 auto 18px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.explainer {
+  max-width: var(--max-w);
+  margin: 60px auto 0;
+}
+.explainer h2 { margin-top: 0.2em; }
+.explainer p { color: var(--text-soft); }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer a { color: var(--text-soft); }
+.site-footer a:hover { color: var(--text); }
+
+.ad-slot {
+  max-width: var(--max-w);
+  margin: 40px auto;
+  padding: 14px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.78rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 22px;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 560px) {
+  h1 { font-size: 2rem; }
+  main { padding: 40px 18px 70px; }
+  .field-row { grid-template-columns: 1fr; }
+  .tool-grid { grid-template-columns: 1fr; }
+}
+
+/* --- nav --- */
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.site-nav {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+.site-nav a:hover, .site-nav a.current { color: var(--text); }
+.site-nav a.current { color: var(--accent); }
+
+/* --- calculator --- */
+.calc-display {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 18px;
+  text-align: right;
+  margin-bottom: 14px;
+}
+.calc-display .prev {
+  font-family: 'Courier New', monospace;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+.calc-display .curr {
+  font-family: 'Courier New', monospace;
+  color: var(--text);
+  font-size: 2.1rem;
+  font-weight: 500;
+  word-break: break-all;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.calc-grid button {
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  padding: 18px 0;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+}
+.calc-grid button:hover { border-color: var(--border-hover); }
+.calc-grid button.op { color: var(--accent); font-weight: 600; }
+.calc-grid button.equals { background: var(--accent); color: #FFFFFF; font-weight: 600; border-color: var(--accent); }
+.calc-grid button.equals:hover { background: #A78BFA; }
+.calc-grid button.wide { grid-column: span 2; }
+.calc-grid button.func { color: var(--result); }
+
+/* --- resume builder --- */
+.builder-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .builder-layout { grid-template-columns: 1fr 1fr; align-items: start; }
+  .max-w { max-width: none; }
+}
+.form-section {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  margin-top: 18px;
+}
+.form-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.form-section h3 {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.entry-block {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.entry-block .remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.entry-block .remove-btn:hover { color: var(--warn); }
+.add-btn {
+  font-family: Arial, sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 16px;
+  background: none;
+  border: 1px dashed var(--border-hover);
+  border-radius: 6px;
+  color: var(--accent);
+  cursor: pointer;
+  width: 100%;
+}
+.add-btn:hover { border-color: var(--accent); }
+textarea {
+  width: 100%;
+  padding: 12px 13px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  resize: vertical;
+  min-height: 70px;
+}
+.resume-preview-wrap {
+  position: sticky;
+  top: 20px;
+}
+.resume-preview {
+  background: #FFFFFF;
+  color: #1A1A1A;
+  border-radius: 10px;
+  padding: 40px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  min-height: 400px;
+}
+.resume-preview h1 { font-family: 'Georgia', serif; color: #111; font-size: 1.5rem; margin-bottom: 2px; }
+.resume-preview .contact-line { color: #444; font-size: 0.85rem; margin-bottom: 16px; }
+.resume-preview h2 {
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #999;
+  padding-bottom: 3px;
+  margin: 18px 0 8px;
+  color: #111;
+}
+.resume-preview .entry-title { font-weight: bold; color: #111; }
+.resume-preview .entry-meta { color: #555; font-size: 0.84rem; margin-bottom: 4px; }
+.resume-preview ul { margin: 4px 0 10px 18px; padding: 0; }
+.resume-preview li { margin-bottom: 3px; }
+.btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.btn {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+}
+.btn.primary { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+.btn.primary:hover { background: #A78BFA; }
+.btn:hover { border-color: var(--border-hover); }
+
+@media print {
+  body * { visibility: hidden; }
+  .resume-preview, .resume-preview * { visibility: visible; }
+  .resume-preview { position: absolute; top: 0; left: 0; width: 100%; border-radius: 0; padding: 20px; }
+}
+
+/* --- video grid --- */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.video-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-raised); }
+.video-item .frame-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-item iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-item .video-title { padding: 12px 14px; font-size: 0.92rem; color: var(--text); }
+.channel-cta {
+  max-width: var(--max-w);
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* --- credit card grid --- */
+.disclosure {
+  max-width: var(--max-w);
+  margin: 0 auto 32px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.credit-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  background: var(--bg-raised);
+}
+.credit-card .card-name { font-family: 'Trebuchet MS', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.credit-card .card-tag { color: var(--result); font-size: 0.85rem; margin-bottom: 10px; }
+.credit-card ul { margin: 10px 0; padding-left: 18px; color: var(--text-soft); font-size: 0.92rem; }
+.credit-card li { margin-bottom: 4px; }
+.credit-card .fine-print { color: var(--text-soft); font-size: 0.78rem; margin-top: 10px; }
+.credit-card .apply-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 6px;
+}
+.credit-card .apply-btn:hover { background: #A78BFA; color: #FFFFFF; text-decoration: none; }
+
+@media (max-width: 640px) {
+  .video-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body data-page="credit-cards">
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html"><span class="mark"></span>All in One Place <small>everything, one place</small></a>
+    <nav class="site-nav">
+      <a class="home-button" href="index.html">⌂ Home</a>
+      <a href="index.html" class="">Calculators</a>
+      <a href="resume-builder.html" class="">Resume Builder</a>
+      <a href="videos.html" class="">Videos</a>
+      <a href="credit-cards.html" class="current">Credit Cards</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap"><div class="ad-slot page-ad-top ad-wide" data-ad="top"></div></div>
+  <div class="wrap">
+    <a class="back-link" href="index.html">&larr; Back home</a>
+    <h1>Credit Card Picks</h1>
+    <p class="lede">A short list of cards worth considering, based on rewards, fees, and who they suit best.</p>
+  </div>
+
+  <div class="disclosure">
+    <strong style="color: var(--text);">Advertiser disclosure:</strong> This page contains affiliate links. If you apply for a card through a link here and are approved, we may earn a commission at no extra cost to you. Card rates, fees, and rewards are set by the issuer, change over time, and should always be confirmed on the issuer's own page before applying. This is not financial advice — consider your own situation and compare offers before deciding.
+  </div>
+
+  <div class="card-grid" id="cardGrid"></div>
+
+  <section class="explainer">
+    <h2>Before you edit this page</h2>
+    <p>Every field below is a placeholder — card names, rates, and links are marked REPLACE and are not real. Fill each one in from your actual affiliate network (e.g. an issuer's partner program, or a network like CJ, Impact, or Rakuten Advertising) with the current, verified terms for that card. Rates and rewards on real cards change often, so whatever you enter should be checked against the issuer's live page before you publish, and re-checked periodically after that — outdated rates are the fastest way to lose a reader's trust.</p>
+  </section>
+<div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
+</main>
+
+<div class="wrap"><div class="ad-slot ad-wide" data-ad="middle"></div></div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span><a href="index.html">All in One Place</a> — built for quick answers</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
+
+<script>
+  // ---- EDIT THIS LIST ----
+  // Replace every field with real, current, verified data and your real affiliate link.
+  const cards = [
+    {
+      name: 'REPLACE Card Name',
+      tag: 'Best for: REPLACE (e.g. cashback on groceries)',
+      perks: [
+        'REPLACE reward rate, e.g. "3% back on groceries, 1% on everything else"',
+        'REPLACE sign-up bonus, e.g. "$200 after $1,000 spend in 3 months"',
+        'REPLACE annual fee, e.g. "$0 annual fee"'
+      ],
+      finePrint: 'REPLACE APR range and any other required disclosure text from the issuer.',
+      link: 'REPLACE_YOUR_AFFILIATE_LINK'
+    },
+    {
+      name: 'REPLACE Card Name',
+      tag: 'Best for: REPLACE (e.g. travel rewards)',
+      perks: [
+        'REPLACE reward rate',
+        'REPLACE sign-up bonus',
+        'REPLACE annual fee'
+      ],
+      finePrint: 'REPLACE APR range and any other required disclosure text.',
+      link: 'REPLACE_YOUR_AFFILIATE_LINK'
+    },
+    {
+      name: 'REPLACE Card Name',
+      tag: 'Best for: REPLACE (e.g. building credit)',
+      perks: [
+        'REPLACE reward rate',
+        'REPLACE sign-up bonus',
+        'REPLACE annual fee'
+      ],
+      finePrint: 'REPLACE APR range and any other required disclosure text.',
+      link: 'REPLACE_YOUR_AFFILIATE_LINK'
+    }
+  ];
+
+  const grid = document.getElementById('cardGrid');
+  cards.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'credit-card';
+    div.innerHTML = `
+      <div class="card-name">${c.name}</div>
+      <div class="card-tag">${c.tag}</div>
+      <ul>${c.perks.map(p => `<li>${p}</li>`).join('')}</ul>
+      <div class="fine-print">${c.finePrint}</div>
+      <a class="apply-btn" href="${c.link}" target="_blank" rel="noopener nofollow sponsored">Apply now</a>
+    `;
+    grid.appendChild(div);
+  });
+</script>
+</body>
+</html>

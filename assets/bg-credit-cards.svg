@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1ef"/><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#fff5e9"/></linearGradient>
+ <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0569b5"/><stop offset="1" stop-color="#00a7df"/></linearGradient>
+ <linearGradient id="c2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d8fd2"/><stop offset="1" stop-color="#28c6ef"/></linearGradient>
+ <linearGradient id="c3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#173d69"/><stop offset="1" stop-color="#386da1"/></linearGradient>
+ <linearGradient id="c4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#25180f"/><stop offset="1" stop-color="#9a641e"/></linearGradient>
+ <filter id="s"><feDropShadow dx="0" dy="22" stdDeviation="15" flood-opacity=".2"/></filter>
+</defs>
+<rect width="1600" height="720" fill="url(#bg)"/>
+<circle cx="150" cy="130" r="180" fill="#ffe0dc" opacity=".55"/><circle cx="1450" cy="570" r="230" fill="#ffefd7" opacity=".7"/>
+<g filter="url(#s)">
+ <g transform="translate(690 215) rotate(4)"><rect width="430" height="270" rx="22" fill="url(#c1)"/><text x="30" y="42" font-family="Arial" font-size="16" fill="#fff" font-weight="700">ALL IN ONE PLACE</text><rect x="38" y="92" width="55" height="43" rx="9" fill="#e5bd5d"/><text x="30" y="225" font-family="Arial" font-size="21" fill="#fff">REWARDS</text></g>
+ <g transform="translate(900 230) rotate(3)"><rect width="430" height="270" rx="22" fill="url(#c2)"/><text x="30" y="42" font-family="Arial" font-size="16" fill="#fff" font-weight="700">ALL IN ONE PLACE</text><rect x="38" y="92" width="55" height="43" rx="9" fill="#e5bd5d"/><text x="30" y="225" font-family="Arial" font-size="21" fill="#fff">CASHBACK</text></g>
+ <g transform="translate(1100 245) rotate(-1)"><rect width="430" height="270" rx="22" fill="url(#c3)"/><text x="30" y="42" font-family="Arial" font-size="16" fill="#fff" font-weight="700">ALL IN ONE PLACE</text><rect x="38" y="92" width="55" height="43" rx="9" fill="#e5bd5d"/><text x="30" y="225" font-family="Arial" font-size="21" fill="#fff">TRAVEL</text></g>
+ <g transform="translate(1290 270) rotate(-8)"><rect width="430" height="270" rx="22" fill="url(#c4)"/><text x="30" y="42" font-family="Arial" font-size="16" fill="#f8e5b8" font-weight="700">ALL IN ONE PLACE</text><rect x="38" y="92" width="55" height="43" rx="9" fill="#e5bd5d"/><text x="30" y="225" font-family="Arial" font-size="21" fill="#f8e5b8">PREMIUM</text></g>
+</g>
+</svg>

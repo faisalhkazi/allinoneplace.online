@@ -1,0 +1,7 @@
+services:
+  all-in-one-place:
+    build: .
+    container_name: all-in-one-place
+    restart: unless-stopped
+    ports:
+      - "8765:8765"

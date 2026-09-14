@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf7ff"/><stop offset=".52" stop-color="#fff"/><stop offset="1" stop-color="#f7efff"/></linearGradient>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b67ad"/><stop offset="1" stop-color="#3aa7e8"/></linearGradient>
+ <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#b66cff"/></linearGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#244b68" flood-opacity=".16"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<circle cx="1420" cy="130" r="220" fill="#dff1ff" opacity=".7"/><circle cx="155" cy="760" r="260" fill="#f0e4ff" opacity=".65"/>
+<g filter="url(#shadow)" opacity=".96">
+ <rect x="960" y="150" width="400" height="255" rx="26" fill="#fff" stroke="#d7e6f1" stroke-width="3" transform="rotate(8 1160 277)"/>
+ <rect x="1000" y="190" width="150" height="22" rx="11" fill="#e7f3fb" transform="rotate(8 1075 201)"/><rect x="1000" y="232" width="270" height="14" rx="7" fill="#eef4f8" transform="rotate(8 1135 239)"/>
+ <circle cx="1260" cy="335" r="58" fill="#fff" stroke="#bfe1f4" stroke-width="8"/><text x="1260" y="348" text-anchor="middle" font-family="Arial" font-size="44" font-weight="700" fill="#0b67ad">%</text>
+ <rect x="1080" y="470" width="390" height="235" rx="24" fill="#fff" stroke="#eadcf8" stroke-width="3" transform="rotate(-8 1275 588)"/>
+ <rect x="1120" y="515" width="165" height="28" rx="14" fill="#eee5ff" transform="rotate(-8 1202 529)"/><rect x="1120" y="560" width="260" height="13" rx="6" fill="#f2edf9" transform="rotate(-8 1250 566)"/>
+ <rect x="1300" y="610" width="95" height="55" rx="14" fill="#7c3aed" transform="rotate(-8 1348 637)"/>
+</g>
+<g filter="url(#shadow)">
+ <rect x="190" y="300" width="470" height="310" rx="30" fill="#fff" stroke="#d8e5ef" stroke-width="3"/>
+ <rect x="230" y="345" width="390" height="72" rx="18" fill="#f6f9fc" stroke="#e2ebf2"/>
+ <text x="585" y="393" text-anchor="end" font-family="Arial" font-size="42" fill="#17344b">12,580</text>
+ <g fill="#edf4f8"><rect x="230" y="445" width="82" height="45" rx="13"/><rect x="322" y="445" width="82" height="45" rx="13"/><rect x="414" y="445" width="82" height="45" rx="13"/><rect x="506" y="445" width="114" height="45" rx="13"/></g>
+ <g fill="#edf4f8"><rect x="230" y="500" width="82" height="45" rx="13"/><rect x="322" y="500" width="82" height="45" rx="13"/><rect x="414" y="500" width="82" height="45" rx="13"/><rect x="506" y="500" width="114" height="45" rx="13"/></g>
+ <rect x="710" y="330" width="300" height="420" rx="20" fill="#fff" stroke="#d8e5ef" stroke-width="3" transform="rotate(6 860 540)"/>
+ <rect x="755" y="385" width="210" height="22" rx="11" fill="#dfeefa" transform="rotate(6 860 396)"/><rect x="755" y="425" width="155" height="13" rx="6" fill="#edf3f7" transform="rotate(6 832 431)"/>
+ <rect x="755" y="490" width="205" height="12" rx="6" fill="#edf3f7" transform="rotate(6 858 496)"/><rect x="755" y="522" width="175" height="12" rx="6" fill="#edf3f7" transform="rotate(6 842 528)"/>
+ <rect x="755" y="600" width="120" height="48" rx="14" fill="url(#blue)" transform="rotate(6 815 624)"/><rect x="890" y="600" width="70" height="48" rx="14" fill="#f0e8ff" transform="rotate(6 925 624)"/>
+</g>
+<g font-family="Arial" font-weight="700" opacity=".75"><text x="90" y="120" font-size="28" fill="#0b67ad">CALCULATE</text><text x="1350" y="820" font-size="28" fill="#7c3aed">CREATE • COMPARE • WATCH</text></g>
+</svg>

@@ -5,6 +5,8 @@ window.AI_AFFILIATE_LINKS = {
   capcut: "", descript: "", perplexity: "", notebooklm: "", notion: "", otter: ""
 };
 window.AD_URLS = { top: "PASTE_TOP_AD_URL_HERE", middle: "PASTE_MIDDLE_AD_URL_HERE", bottom: "PASTE_BOTTOM_AD_URL_HERE" };
+// Add your real AdSense publisher ID after Google approves/connects the site. Example: ca-pub-1234567890123456
+window.ADSENSE_PUBLISHER_ID = "";
 // Paste your YouTube channel URL here. Individual video URLs can be pasted on videos.html.
 window.YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@NoorHadithUrdu";
 
@@ -89,6 +91,16 @@ function renderAdContent(slot,key,url){
   },{once:true});
   slot.appendChild(card);
 }
+function renderFooter(){
+  const old=document.querySelector('.site-footer'); if(!old) return;
+  old.outerHTML=`<footer class="site-footer"><div class="wrap"><div class="footer-main"><div><div class="footer-brand">All in One Place</div><div class="footer-copy">Useful tools, calculators, career resources and practical guides in one place.</div></div><nav class="footer-links" aria-label="Footer navigation"><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="disclaimer.html">Disclaimer</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></nav></div><div class="footer-note">© 2026 All in One Place. Information and calculator results are provided for general purposes. Financial, tax, legal and other consequential decisions should be verified with the relevant provider or qualified professional.</div></div></footer>`;
+}
+function loadAdSense(){
+  const pub=String(window.ADSENSE_PUBLISHER_ID||'').trim();
+  if(!/^ca-pub-\d+$/.test(pub)) return;
+  if(document.querySelector('script[data-aop-adsense]')) return;
+  const s=document.createElement('script'); s.async=true; s.crossOrigin='anonymous'; s.dataset.aopAdsense='1'; s.src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(pub)}`; document.head.appendChild(s);
+}
 function renderAdSlots(){
   document.querySelectorAll('.ad-slot[data-ad]').forEach(slot=>{
     const key=slot.dataset.ad||'top',url=String(AD_URLS[key]||'').trim();
@@ -168,5 +180,5 @@ function openTool(key){
 }
 function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min)h=s=0;else{const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4}h/=6}return `${Math.round(h*360)}°, ${Math.round(s*100)}%, ${Math.round(l*100)}%`}
 function ensureCollectionBindings(){buttonToolHandlers();}
-function initSite(){renderHeader();renderAdSlots();ensureCollectionBindings();}
+function initSite(){renderHeader();renderFooter();loadAdSense();renderAdSlots();ensureCollectionBindings();}
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initSite); else initSite();

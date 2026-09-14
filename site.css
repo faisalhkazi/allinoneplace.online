@@ -669,3 +669,27 @@ body[data-page="business"] .ad-slot{margin:12px auto!important;}
   .video-heart-cta{grid-template-columns:1fr!important;text-align:center;}
   .heart-cta-icon{margin:0 auto;}
 }
+
+/* AdSense / trust pages */
+.legal-page{max-width:920px;margin:0 auto;padding-bottom:48px}
+.content-card{margin:18px 0 30px;padding:26px 28px;background:rgba(17,25,37,.94);border:1px solid #263548;border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.content-card h2{margin:28px 0 8px;color:#edf3fa;font-size:1.18rem}
+.content-card h2:first-child{margin-top:0}
+.content-card p,.content-card li{color:#a8b6c8;line-height:1.72;font-size:.95rem}
+.content-card ul{padding-left:22px}
+.content-card a{color:#8eb3ff}
+.contact-email{font-size:1.12rem!important;font-weight:700}
+.trust-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px}
+.trust-links a{color:#a9bce0;text-decoration:none}
+.trust-links a:hover{text-decoration:underline;color:#fff}
+.site-footer{border-top:1px solid #1d2a3a!important;background:#070b12!important;margin-top:30px!important;padding:28px 0 34px!important}
+.site-footer .footer-main{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.site-footer .footer-brand{font-weight:800;color:#edf3fa;font-size:.95rem}
+.site-footer .footer-copy{color:#7f91a7;font-size:.78rem;margin-top:5px}
+.site-footer .footer-links{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:flex-end}
+.site-footer .footer-links a{color:#9fb0c4;font-size:.78rem;text-decoration:none}
+.site-footer .footer-links a:hover{color:#fff;text-decoration:underline}
+.site-footer .footer-note{margin-top:18px;padding-top:14px;border-top:1px solid #162333;color:#6f8094;font-size:.72rem;line-height:1.6}
+.adsense-slot{min-height:90px;display:flex;align-items:center;justify-content:center;margin:18px 0;border:1px dashed #293a50;border-radius:12px;background:rgba(11,19,32,.55)}
+.adsense-placeholder{color:#65778c;font-size:.72rem;text-align:center;padding:14px}
+@media(max-width:650px){.content-card{padding:20px 18px}.site-footer .footer-links{justify-content:flex-start}.site-footer .footer-main{display:block}.site-footer .footer-links{margin-top:14px}}

@@ -6,7 +6,7 @@ window.AI_AFFILIATE_LINKS = {
 };
 window.AD_URLS = { top: "PASTE_TOP_AD_URL_HERE", middle: "PASTE_MIDDLE_AD_URL_HERE", bottom: "PASTE_BOTTOM_AD_URL_HERE" };
 // Add your real AdSense publisher ID after Google approves/connects the site. Example: ca-pub-1234567890123456
-window.ADSENSE_PUBLISHER_ID = "";
+window.ADSENSE_PUBLISHER_ID = "ca-pub-4992795020210826";
 // Paste your YouTube channel URL here. Individual video URLs can be pasted on videos.html.
 window.YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@NoorHadithUrdu";
 

@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATS Resume Builder — Free, ATS-friendly resume maker | All in One Place</title><link rel="canonical" href="https://allinoneplace.online/resume-builder.html">
 <meta name="description" content="Build a clean, ATS-friendly resume with a live preview. No sign-up. Download as PDF or plain text.">
+<meta property="og:type" content="website"><meta property="og:title" content="ATS Resume Builder — Free, ATS-friendly resume maker | All in One Place"><meta property="og:description" content="Build a clean, ATS-friendly resume with a live preview. No sign-up. Download as PDF or plain text."><meta property="og:url" content="https://allinoneplace.online/resume-builder.html"><meta property="og:site_name" content="All in One Place"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ATS Resume Builder — Free, ATS-friendly resume maker | All in One Place"><meta name="twitter:description" content="Build a clean, ATS-friendly resume with a live preview. No sign-up. Download as PDF or plain text.">
 <style>
 
 :root {
@@ -349,6 +351,83 @@ main { padding: 56px 24px 90px; }
 .calc-grid button.wide { grid-column: span 2; }
 .calc-grid button.func { color: var(--result); }
 
+/* --- resume strength meter --- */
+.strength-card {
+  margin-bottom: 24px;
+}
+.strength-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.strength-score-ring {
+  position: relative;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: conic-gradient(var(--ring-color, var(--accent)) calc(var(--ring-pct, 0) * 1%), var(--border) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease;
+}
+.strength-score-ring::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--bg-raised);
+}
+.strength-score-ring span {
+  position: relative;
+  z-index: 1;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+.strength-head h3 { margin-bottom: 2px; }
+.strength-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+.strength-checklist {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+.strength-checklist li {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+.strength-checklist li.pass { color: var(--text); }
+.strength-checklist .check-icon {
+  flex-shrink: 0;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.strength-checklist li.pass .check-icon { color: #34D399; }
+.strength-checklist li.fail .check-icon { color: var(--warn); }
+.strength-checklist .tip {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--warn);
+  margin-top: 2px;
+}
+@media (max-width: 560px) {
+  .strength-checklist { grid-template-columns: 1fr; }
+}
+
 /* --- resume builder --- */
 .builder-layout {
   display: grid;
@@ -559,6 +638,17 @@ textarea {
     <h1>ATS Resume Builder</h1>
     <p class="lede">Fill in the fields on the left — the preview on the right updates as you type. The layout is deliberately plain: single column, no tables, no graphics, no columns — the format applicant tracking systems parse most reliably.</p>
 
+    <div class="card strength-card" id="strengthCard" aria-live="polite">
+      <div class="strength-head">
+        <div class="strength-score-ring" id="strengthRing"><span id="strengthScoreNum">0</span></div>
+        <div>
+          <h3>Resume Strength Score</h3>
+          <div class="strength-label" id="strengthLabel">Fill in the form to see your score</div>
+        </div>
+      </div>
+      <ul class="strength-checklist" id="strengthChecklist"></ul>
+    </div>
+
     <div class="builder-layout">
       <div>
         <div class="card">
@@ -621,6 +711,7 @@ textarea {
   </div>
 <div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
 <section class="content-card seo-guide"><h2>What makes a resume ATS-friendly?</h2><p>An applicant tracking system (ATS) is software employers may use to organize and search applications. A practical ATS-friendly resume normally uses clear section headings, readable formatting, standard job titles and text that accurately reflects the skills and experience in the job description.</p><p>Avoid relying on images to communicate essential information. Keep dates, employers, responsibilities and achievements as selectable text. Tailor the document to the role instead of filling it with unrelated keywords.</p><h2>How to improve your resume</h2><p>Start with a concise summary, focus experience bullets on outcomes, quantify results where possible and include relevant tools or technologies. Proofread the final document and check that the exported file looks correct before sending it.</p><h2>Frequently asked questions</h2><p><strong>Should I use the same resume for every job?</strong> A strong base resume is useful, but tailoring the summary, skills and achievement bullets to each role can make the application more relevant.</p><p><strong>Does ATS optimization guarantee an interview?</strong> No. ATS-friendly formatting can improve readability and parsing, but hiring decisions depend on the employer and the quality of your application.</p></section>
+<div class="wrap"><div class="ad-slot" data-ad="incontent"></div></div>
 </main>
 
 <div class="wrap"><div class="ad-slot ad-wide" data-ad="middle"></div></div>
@@ -686,6 +777,97 @@ textarea {
     return d.innerHTML;
   }
 
+  function getExperiences() {
+    return [...expList.querySelectorAll('.entry-block')].map(block => {
+      const company = block.querySelector('.exp-company').value;
+      const role = block.querySelector('.exp-role').value;
+      const bullets = block.querySelector('.exp-bullets').value.split('\n').map(b => b.trim()).filter(Boolean);
+      return { company, role, bullets };
+    }).filter(e => e.company || e.role || e.bullets.length);
+  }
+
+  function getEduCount() {
+    return [...eduList.querySelectorAll('.entry-block')].filter(block => {
+      const school = block.querySelector('.edu-school').value;
+      const degree = block.querySelector('.edu-degree').value;
+      return Boolean(school || degree);
+    }).length;
+  }
+
+  const WEAK_PHRASE_RE = /^(responsible for|worked on|helped( with)?|duties included|in charge of|tasked with|assisted with)/i;
+  const NUMBER_RE = /[\d%$₹€£]/;
+
+  function computeStrength(data) {
+    const checks = [];
+    let score = 0;
+
+    const contactOk = Boolean(data.email && data.phone && (data.location || data.link));
+    checks.push({ pass: contactOk, label: 'Complete contact details', tip: 'Add an email, phone number, and your location or a LinkedIn/portfolio link.' });
+    score += contactOk ? 10 : 0;
+
+    const summaryWords = data.summary.trim().split(/\s+/).filter(Boolean);
+    const summaryOk = summaryWords.length >= 15 && summaryWords.length <= 80;
+    checks.push({ pass: summaryOk, label: 'Focused professional summary (15–80 words)', tip: 'Write a 2–3 sentence summary highlighting your experience and biggest impact.' });
+    score += summaryOk ? 10 : (summaryWords.length > 0 ? 4 : 0);
+
+    const expCount = data.experiences.length;
+    const expCountOk = expCount >= 2;
+    checks.push({ pass: expCountOk, label: 'At least two work experience entries', tip: 'Most recruiters expect to see your last two (or more) roles.' });
+    score += expCountOk ? 15 : (expCount === 1 ? 7 : 0);
+
+    const allBullets = data.experiences.flatMap(e => e.bullets);
+    const bulletsOk = expCount > 0 && data.experiences.every(e => e.bullets.length >= 2);
+    checks.push({ pass: bulletsOk, label: 'Each role has 2+ bullet points', tip: 'Add at least 2 bullet points per role describing what you did and the result.' });
+    score += bulletsOk ? 15 : (allBullets.length > 0 ? 6 : 0);
+
+    const quantified = allBullets.filter(b => NUMBER_RE.test(b));
+    const quantRatio = allBullets.length ? quantified.length / allBullets.length : 0;
+    const quantOk = allBullets.length > 0 && quantRatio >= 0.5;
+    checks.push({ pass: quantOk, label: 'Achievements are quantified', tip: 'Add numbers, percentages, or amounts to at least half your bullet points (e.g. "reduced costs by 15%").' });
+    score += Math.round(20 * Math.min(1, quantRatio / 0.5));
+
+    const weakBullets = allBullets.filter(b => WEAK_PHRASE_RE.test(b));
+    const verbsOk = allBullets.length > 0 && weakBullets.length === 0;
+    checks.push({ pass: verbsOk, label: 'Starts bullets with strong action verbs', tip: 'Avoid phrases like "responsible for" or "worked on" — start with a verb like "Led", "Reduced", "Built" or "Negotiated".' });
+    if (allBullets.length > 0) {
+      score += verbsOk ? 15 : Math.round(15 * (1 - weakBullets.length / allBullets.length));
+    }
+
+    const eduOk = data.eduCount > 0;
+    checks.push({ pass: eduOk, label: 'Education listed', tip: 'Add at least one degree, certification, or training entry.' });
+    score += eduOk ? 10 : 0;
+
+    const skillCount = data.skills.split(',').map(s => s.trim()).filter(Boolean).length;
+    const skillsOk = skillCount >= 5;
+    checks.push({ pass: skillsOk, label: 'At least 5 relevant skills listed', tip: 'List 5 or more specific skills, tools, or technologies relevant to the role.' });
+    score += skillsOk ? 5 : Math.round(5 * Math.min(1, skillCount / 5));
+
+    return { score: Math.max(0, Math.min(100, Math.round(score))), checks };
+  }
+
+  function renderStrengthUI(strength) {
+    const ring = document.getElementById('strengthRing');
+    const num = document.getElementById('strengthScoreNum');
+    const label = document.getElementById('strengthLabel');
+    const list = document.getElementById('strengthChecklist');
+    const score = strength.score;
+    let color = '#FF7A6E', text = 'Needs work';
+    if (score >= 90) { color = '#34D399'; text = 'Excellent'; }
+    else if (score >= 75) { color = '#8B5CF6'; text = 'Strong'; }
+    else if (score >= 50) { color = '#F2B84B'; text = 'Good start'; }
+    ring.style.setProperty('--ring-pct', score);
+    ring.style.setProperty('--ring-color', color);
+    num.textContent = score;
+    label.textContent = `${text} — ${score}/100`;
+    label.style.color = color;
+    list.innerHTML = strength.checks.map(c => `
+      <li class="${c.pass ? 'pass' : 'fail'}">
+        <span class="check-icon">${c.pass ? '✓' : '✗'}</span>
+        <span>${esc(c.label)}${c.pass ? '' : `<span class="tip">${esc(c.tip)}</span>`}</span>
+      </li>
+    `).join('');
+  }
+
   function render() {
     const name = document.getElementById('fName').value;
     const email = document.getElementById('fEmail').value;
@@ -729,6 +911,14 @@ textarea {
       ${eduHtml ? `<h2>Education</h2>${eduHtml}` : ''}
       ${skills ? `<h2>Skills</h2><p>${esc(skills)}</p>` : ''}
     `;
+
+    const strength = computeStrength({
+      email, phone, location, link, summary,
+      experiences: getExperiences(),
+      eduCount: getEduCount(),
+      skills
+    });
+    renderStrengthUI(strength);
   }
 
   document.querySelectorAll('#fName, #fEmail, #fPhone, #fLocation, #fLink, #fSummary, #fSkills')

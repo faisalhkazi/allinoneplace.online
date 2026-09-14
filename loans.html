@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loans — How loans work &amp; best deals | All in One Place</title><link rel="canonical" href="https://allinoneplace.online/loans.html">
+<meta name="description" content="Understand how home, car, bike, personal and education loans work, and compare the best current loan deals.">
+<meta property="og:type" content="website"><meta property="og:title" content="Loans — How loans work &amp; best deals | All in One Place"><meta property="og:description" content="Understand how home, car, bike, personal and education loans work, and compare the best current loan deals."><meta property="og:url" content="https://allinoneplace.online/loans.html"><meta property="og:site_name" content="All in One Place"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Loans — How loans work &amp; best deals | All in One Place"><meta name="twitter:description" content="Understand how home, car, bike, personal and education loans work, and compare the best current loan deals.">
+<style>
+
+:root {
+  --bg: #10131A;
+  --bg-raised: #171B24;
+  --bg-input: #0D0F15;
+  --border: #262B36;
+  --border-hover: #3A4152;
+  --text: #E7E9EE;
+  --text-soft: #8D95A6;
+  --accent: #8B5CF6;
+  --accent-dim: #6D28D9;
+  --result: #F2B84B;
+  --warn: #FF7A6E;
+  --max-w: 900px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: #A78BFA; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+h1, h2, h3 { font-family: 'Trebuchet MS', sans-serif; font-weight: 600; line-height: 1.15; margin: 0 0 0.4em; color: var(--text); letter-spacing: -0.01em; }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.4rem; }
+p { margin: 0 0 1em; max-width: 62ch; }
+
+.site-header { border-bottom: 1px solid var(--border); padding: 20px 24px; }
+.site-header-inner, .wrap { max-width: var(--max-w); margin: 0 auto; }
+.brand { font-family: 'Trebuchet MS', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--text); display: inline-flex; align-items: center; gap: 9px; }
+.brand .mark { width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, var(--accent), var(--accent-dim)); flex-shrink: 0; }
+.brand small { font-family: Arial, sans-serif; font-size: 0.72rem; font-weight: 500; color: var(--text-soft); }
+
+main { padding: 56px 24px 90px; }
+
+.hero { max-width: var(--max-w); margin: 0 auto 40px; position: relative; }
+.hero p.lede { color: var(--text-soft); font-size: 1.08rem; max-width: 62ch; }
+.back-link { display: inline-block; margin-bottom: 22px; font-size: 0.88rem; color: var(--text-soft); }
+.back-link:hover { color: var(--accent); }
+
+.disclosure { max-width: var(--max-w); margin: 0 auto 32px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); color: var(--text-soft); font-size: 0.85rem; }
+
+.section-label { max-width: var(--max-w); margin: 40px auto 18px; font-size: 0.85rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: .04em; }
+
+/* Loan-type picker grid */
+.loan-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: var(--max-w); margin: 0 auto; }
+.loan-type-card { display: block; padding: 22px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-raised); border-top: 3px solid var(--accent); transition: .15s ease; }
+.loan-type-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.loan-type-card .icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; background: rgba(139,92,246,.14); color: var(--accent); font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
+.loan-type-card .name { font-family: 'Trebuchet MS', sans-serif; font-size: 1.08rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.loan-type-card .desc { color: var(--text-soft); font-size: 0.88rem; max-width: none; margin: 0; }
+.loan-type-card.home { border-top-color: #4f8dff; }
+.loan-type-card.home .icon { background: rgba(79,141,255,.14); color: #8fb4ff; }
+.loan-type-card.car { border-top-color: #f2994a; }
+.loan-type-card.car .icon { background: rgba(242,153,74,.14); color: #ffbf80; }
+.loan-type-card.bike { border-top-color: #35d0ba; }
+.loan-type-card.bike .icon { background: rgba(53,208,186,.14); color: #6fe3d1; }
+.loan-type-card.personal { border-top-color: #a855f7; }
+.loan-type-card.personal .icon { background: rgba(168,85,247,.14); color: #cba3ff; }
+.loan-type-card.education { border-top-color: #34d399; }
+.loan-type-card.education .icon { background: rgba(52,211,153,.14); color: #7fe0a8; }
+
+/* How-it-works steps */
+.how-it-works { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.step-card { padding: 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-raised); }
+.step-card .step-num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: .85rem; margin-bottom: 10px; }
+.step-card h3 { font-size: .98rem; margin-bottom: 6px; }
+.step-card p { color: var(--text-soft); font-size: .85rem; margin: 0; max-width: none; }
+
+.explainer { max-width: var(--max-w); margin: 60px auto 0; }
+.explainer h2 { margin-top: 0.2em; }
+.explainer p { color: var(--text-soft); }
+.explainer ul { color: var(--text-soft); padding-left: 20px; }
+.explainer li { margin-bottom: 6px; }
+
+.card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: var(--max-w); margin: 0 auto; }
+.credit-card { border: 1px solid var(--border); border-radius: 10px; padding: 24px; background: var(--bg-raised); }
+.credit-card .card-name { font-family: 'Trebuchet MS', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.credit-card .card-tag { color: var(--result); font-size: 0.85rem; margin-bottom: 10px; }
+.credit-card ul { margin: 10px 0; padding-left: 18px; color: var(--text-soft); font-size: 0.92rem; }
+.credit-card li { margin-bottom: 4px; }
+.credit-card .fine-print { color: var(--text-soft); font-size: 0.78rem; margin-top: 10px; }
+.credit-card .apply-btn { display: inline-block; margin-top: 12px; padding: 10px 18px; background: var(--accent); color: #FFFFFF; font-weight: 600; font-size: 0.88rem; border-radius: 6px; }
+.credit-card .apply-btn:hover { background: #A78BFA; color: #FFFFFF; text-decoration: none; }
+
+.site-footer { border-top: 1px solid var(--border); padding: 28px 24px; color: var(--text-soft); font-size: 0.85rem; }
+.site-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.site-footer a { color: var(--text-soft); }
+.site-footer a:hover { color: var(--text); }
+
+.ad-slot { max-width: var(--max-w); margin: 40px auto; padding: 14px; border: 1px dashed var(--border); border-radius: 8px; text-align: center; color: var(--text-soft); font-size: 0.78rem; }
+
+.site-header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+.site-nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.site-nav a { font-size: 0.88rem; color: var(--text-soft); font-weight: 500; }
+.site-nav a:hover, .site-nav a.current { color: var(--text); }
+.site-nav a.current { color: var(--accent); }
+
+@media (max-width: 700px) {
+  h1 { font-size: 2rem; }
+  main { padding: 40px 18px 70px; }
+  .loan-type-grid { grid-template-columns: 1fr 1fr; }
+  .how-it-works { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 460px) {
+  .loan-type-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+<meta name="google-adsense-account" content="ca-pub-4992792502210826">
+</head>
+<body data-page="loans">
+
+<header class="site-header"></header>
+
+<main>
+  <div class="wrap"><div class="ad-slot page-ad-top ad-wide" data-ad="top"></div></div>
+
+  <div class="wrap">
+    <a class="back-link" href="index.html">&larr; Back home</a>
+    <h1>Loans, explained simply — then matched to the best deal</h1>
+    <p class="lede">Before you borrow, understand what you're actually signing up for: how the interest is calculated, what changes your rate, and what a lender checks before saying yes. Pick a loan type below for a plain-language walkthrough, and see current top picks once offers are added.</p>
+  </div>
+
+  <div class="disclosure">
+    <strong style="color: var(--text);">Advertiser disclosure:</strong> Some links on these pages are affiliate links. If you apply for a loan through a link here and are approved, we may earn a commission at no extra cost to you. Interest rates, fees and eligibility are set by the lender, change over time, and should always be confirmed on the lender's own page before applying. This is general information, not financial advice — compare offers and consider your own situation before deciding.
+  </div>
+
+  <p class="section-label">Choose a loan type</p>
+  <div class="loan-type-grid">
+    <a class="loan-type-card home" href="home-loan.html">
+      <div class="icon">⌂</div>
+      <div class="name">Home Loan</div>
+      <p class="desc">Long tenure, secured against the property, usually the lowest rate you'll ever borrow at.</p>
+    </a>
+    <a class="loan-type-card car" href="car-loan.html">
+      <div class="icon">🚗</div>
+      <div class="name">Car Loan</div>
+      <p class="desc">Secured against the vehicle, quick approval, shorter tenure than a home loan.</p>
+    </a>
+    <a class="loan-type-card bike" href="bike-loan.html">
+      <div class="icon">🏍</div>
+      <div class="name">Bike Loan</div>
+      <p class="desc">Small ticket size, fast disbursal, often near-instant approval at the dealership.</p>
+    </a>
+    <a class="loan-type-card personal" href="personal-loan.html">
+      <div class="icon">₹</div>
+      <div class="name">Personal Loan</div>
+      <p class="desc">Unsecured, no collateral, flexible use — but the highest interest rate of the group.</p>
+    </a>
+    <a class="loan-type-card education" href="education-loan.html">
+      <div class="icon">🎓</div>
+      <div class="name">Education Loan</div>
+      <p class="desc">Funds tuition and living costs, often with a moratorium until studies finish.</p>
+    </a>
+  </div>
+
+  <p class="section-label">How a loan works, in four steps</p>
+  <div class="how-it-works">
+    <div class="step-card"><div class="step-num">1</div><h3>You borrow a principal</h3><p>The lender pays out a lump sum (or, for education loans, in stages) that you agree to repay over a fixed period.</p></div>
+    <div class="step-card"><div class="step-num">2</div><h3>Interest is added</h3><p>The lender charges interest — a percentage of what you still owe — as the cost of lending you the money.</p></div>
+    <div class="step-card"><div class="step-num">3</div><h3>You repay in EMIs</h3><p>Each Equated Monthly Instalment covers part interest, part principal. Early payments are mostly interest; later ones are mostly principal.</p></div>
+    <div class="step-card"><div class="step-num">4</div><h3>The loan closes</h3><p>Once the final instalment clears, the lender releases any lien (on your house or vehicle) and the loan is closed.</p></div>
+  </div>
+
+  <div class="card-grid" id="loanDeals" style="margin-top:40px;"></div>
+
+  <section class="explainer">
+    <h2>What actually changes your interest rate</h2>
+    <ul>
+      <li><strong>Credit score</strong> — a higher score signals lower risk to the lender and usually unlocks a better rate.</li>
+      <li><strong>Loan-to-value / down payment</strong> — putting more down (or borrowing a smaller share of the asset's value) can lower your rate.</li>
+      <li><strong>Fixed vs floating rate</strong> — fixed rates stay the same for the term; floating rates move with the lender's benchmark rate, so your EMI can rise or fall.</li>
+      <li><strong>Tenure</strong> — a longer tenure usually means a lower EMI but more total interest paid over the life of the loan.</li>
+      <li><strong>Income and existing debt</strong> — lenders check your repayment capacity against what you already owe elsewhere.</li>
+    </ul>
+    <h2>Before you edit this page</h2>
+    <p>The loan cards above are placeholders — lender names, rates, and links are marked REPLACE and are not real. Fill each one in from your actual affiliate network or direct lender partnership with current, verified terms. Interest rates and eligibility on real loan products change often, so check the lender's live page before publishing and re-check periodically after that.</p>
+  </section>
+
+  <div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
+
+  <section class="content-card seo-guide"><h2>How to compare loan offers</h2><p>A useful loan comparison looks past the headline interest rate. Check the processing fee, prepayment or foreclosure charges, late-payment penalties, whether the rate is fixed or floating, and any mandatory insurance bundled into the loan.</p><p>The right loan depends on the asset and your timeline. A home loan usually makes sense only for the property you intend to live in or hold long-term; a short-tenure personal loan can cost far more in interest than a secured loan of the same amount.</p><h2>Use loans responsibly</h2><p>Borrow only what you can comfortably repay alongside your other expenses. Missing EMIs can affect your credit score and, for secured loans, risk the asset used as collateral. A lower EMI from a longer tenure often means paying significantly more interest overall — always check the total repayment amount, not just the monthly figure.</p><h2>Frequently asked questions</h2><p><strong>Is a secured loan always cheaper than an unsecured one?</strong> Usually, because collateral lowers the lender's risk, but always compare the actual annual percentage rate (APR), not just the advertised rate.</p><p><strong>Are the offers on this site guaranteed?</strong> No. Eligibility, approval, rates and terms are determined by the relevant lender and can change at any time.</p></section>
+<div class="wrap"><div class="ad-slot" data-ad="incontent"></div></div>
+</main>
+
+<footer class="site-footer"></footer>
+
+<script>
+  // ---- EDIT THIS LIST ----
+  // Replace every field with real, current, verified data and your real affiliate link.
+  const loanDeals = [
+    { name: 'REPLACE Lender Name', tag: 'Best for: REPLACE (e.g. lowest home loan rate)', perks: ['REPLACE interest rate, e.g. "Starting at 8.10% p.a."','REPLACE processing fee, e.g. "0.5% of loan amount"','REPLACE max tenure, e.g. "Up to 30 years"'], finePrint: 'REPLACE eligibility and any other required disclosure text from the lender.', link: 'REPLACE_YOUR_AFFILIATE_LINK' },
+    { name: 'REPLACE Lender Name', tag: 'Best for: REPLACE (e.g. fastest car loan approval)', perks: ['REPLACE interest rate','REPLACE processing fee','REPLACE max tenure'], finePrint: 'REPLACE eligibility and any other required disclosure text.', link: 'REPLACE_YOUR_AFFILIATE_LINK' },
+    { name: 'REPLACE Lender Name', tag: 'Best for: REPLACE (e.g. no-collateral personal loan)', perks: ['REPLACE interest rate','REPLACE processing fee','REPLACE max tenure'], finePrint: 'REPLACE eligibility and any other required disclosure text.', link: 'REPLACE_YOUR_AFFILIATE_LINK' }
+  ];
+  const grid = document.getElementById('loanDeals');
+  loanDeals.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'credit-card';
+    div.innerHTML = `
+      <div class="card-name">${c.name}</div>
+      <div class="card-tag">${c.tag}</div>
+      <ul>${c.perks.map(p => `<li>${p}</li>`).join('')}</ul>
+      <div class="fine-print">${c.finePrint}</div>
+      <a class="apply-btn" href="${c.link}" target="_blank" rel="noopener nofollow sponsored">Check offer</a>
+    `;
+    grid.appendChild(div);
+  });
+</script>
+</body>
+</html>

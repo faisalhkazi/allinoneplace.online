@@ -1,5 +1,138 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Tools Advice | All in One Place</title><link rel="canonical" href="https://allinoneplace.online/ai-tools-advice.html"><meta name="description" content="Choose the right AI tools for writing, coding, research, design, video and productivity, with optional affiliate links."><link rel="stylesheet" href="site.css"><meta name="google-adsense-account" content="ca-pub-4992792502210826">
-</head><body data-page="ai"><header class="site-header"></header><main><div class="wrap"><section class="hero"><p class="eyebrow">AI TOOL DIRECTORY</p><h1>Which AI tool should you use?</h1><p class="lede">Tell us what you want to accomplish and get a focused shortlist. Add your affiliate URLs in <code>site.js</code> and each recommendation can become an earning link.</p></section><div class="ad-slot" data-ad="top"></div><section class="tool-panel"><div class="field"><label for="goal">What are you trying to do?</label><select id="goal"><option value="writing">Writing, emails & content</option><option value="coding">Coding & software development</option><option value="design">Images, design & presentations</option><option value="video">Video & social media</option><option value="research">Research & studying</option><option value="productivity">Productivity & meetings</option><option value="business">Business & marketing</option></select></div><div id="recs" class="collection-grid"></div></section><div class="ad-slot" data-ad="middle"></div><section class="tool-panel"><h2>Affiliate setup</h2><p>Put your affiliate URLs in <code>AI_AFFILIATE_LINKS</code> inside <code>site.js</code>. If a URL is empty, the card shows an informational state instead of sending visitors to a broken link.</p></section></div><section class="content-card seo-guide"><h2>Choosing an AI tool</h2><p>AI tools are useful for different jobs: writing, coding, research, design, presentations, video editing and productivity. Instead of choosing a tool because it is popular, compare the task you need to complete, output quality, privacy options, pricing, usage limits and how easily the tool fits your workflow.</p><p>When using AI for important work, review the output yourself. AI-generated answers can contain errors, unsupported claims or outdated information.</p><h2>How to evaluate an AI service</h2><p>Start with a small real task and measure the result. Check whether the service stores prompts or uploaded files, whether business data is protected, and whether commercial-use rights match your needs.</p><h2>Frequently asked questions</h2><p><strong>Is one AI tool best for everyone?</strong> No. Different tools have different strengths, pricing and privacy models.</p><p><strong>Should AI output be trusted without review?</strong> No. Verify important facts and review generated code, documents or recommendations before using them.</p></section>
-</main><footer class="site-footer"><div class="wrap"><p>All in One Place — useful tools, calculators and resources.</p></div></footer><script>
-document.addEventListener('DOMContentLoaded',function(){const data={writing:[['ChatGPT','General writing, brainstorming, editing and content workflows.','chatgpt'],['Claude','Long-form writing and document reasoning.','claude'],['Grammarly','Proofreading, tone and writing refinement.','grammarly']],coding:[['GitHub Copilot','AI coding assistance inside development workflows.','copilot'],['ChatGPT','Debugging, explanations and code generation.','chatgpt'],['Claude','Reasoning through larger coding tasks.','claude']],design:[['Canva','Presentations, social graphics and visual design.','canva'],['Adobe Firefly','Generative creative assets and editing.','firefly'],['ChatGPT','Creative ideation and image workflows.','chatgpt']],video:[['CapCut','Fast social-video editing and AI features.','capcut'],['Canva','Social video and presentation creation.','canva'],['Descript','Transcript-based audio and video editing.','descript']],research:[['Perplexity','Research and source discovery.','perplexity'],['ChatGPT','Explaining, synthesizing and studying.','chatgpt'],['NotebookLM','Work with your own source material.','notebooklm']],productivity:[['ChatGPT','Planning, summarizing and drafting.','chatgpt'],['Notion AI','Workspace writing and knowledge workflows.','notion'],['Otter','Meeting transcription and notes.','otter']],business:[['ChatGPT','Marketing, strategy and business writing.','chatgpt'],['Canva','Marketing assets and presentations.','canva'],['Perplexity','Market and competitor research.','perplexity']]};const links=window.AI_AFFILIATE_LINKS||{};const recs=document.getElementById('recs'),goal=document.getElementById('goal');function render(){recs.innerHTML=data[goal.value].map(x=>{const href=links[x[2]]||'';return `<article class="collection-card ai-tool-card"><span class="collection-icon">✦</span><h3>${x[0]}</h3><p>${x[1]}</p><a class="primary-btn inline-btn" ${href?`href="${href}" target="_blank" rel="nofollow sponsored noopener"`:'href="#" data-empty'}>${href?'Try this tool':'Affiliate link not added yet'}</a></article>`}).join('');recs.querySelectorAll('[data-empty]').forEach(a=>a.onclick=e=>e.preventDefault())}goal.onchange=render;render()});
-</script><script src="site.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Tools Directory — Which AI is best for what | All in One Place</title><link rel="canonical" href="https://allinoneplace.online/ai-tools-advice.html"><meta name="description" content="A detailed, category-by-category guide to the best AI tools — writing, images, video, coding, research, productivity and business — with affiliate links.">
+<meta property="og:type" content="website"><meta property="og:title" content="AI Tools Directory — Which AI is best for what | All in One Place"><meta property="og:description" content="A detailed, category-by-category guide to the best AI tools — writing, images, video, coding, research, productivity and business — with affiliate links."><meta property="og:url" content="https://allinoneplace.online/ai-tools-advice.html"><meta property="og:site_name" content="All in One Place"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="AI Tools Directory — Which AI is best for what | All in One Place"><meta name="twitter:description" content="A detailed, category-by-category guide to the best AI tools, with affiliate links."><link rel="stylesheet" href="site.css">
+<style>
+.ai-jump{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;}
+.ai-jump a{font-size:.82rem;font-weight:700;padding:8px 14px;border-radius:999px;background:#111b29;border:1px solid #2a3a4e;color:#9fc3ff;}
+.ai-jump a:hover{background:#182840;border-color:#3d6494;color:#dff0ff;}
+.ai-category{margin:44px 0;scroll-margin-top:90px;}
+.ai-category-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.ai-category-head h2{margin:0;}
+.ai-category-blurb{color:#93a3b7;margin:0 0 18px;max-width:70ch;}
+.ai-tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+@media(max-width:900px){.ai-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:640px){.ai-tool-grid{grid-template-columns:1fr;}}
+.ai-tool-card{background:linear-gradient(145deg,rgba(17,25,37,.98),rgba(11,18,28,.98));border:1px solid #263548;border-radius:16px;padding:22px;position:relative;display:flex;flex-direction:column;}
+.ai-tool-card.top-pick{border-color:#3a4a68;box-shadow:0 0 0 1px rgba(130,169,255,.25),0 14px 34px rgba(0,0,0,.28);}
+.ai-tool-card .top-pick-badge{position:absolute;top:-11px;left:18px;background:linear-gradient(135deg,#4d8dff,#6d63ff);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.05em;padding:4px 10px;border-radius:999px;text-transform:uppercase;}
+.ai-tool-card .ai-tool-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#16263b;color:#82a9ff;font-size:1.1rem;font-weight:800;margin-bottom:12px;border:1px solid #29415e;}
+.ai-tool-card h3{margin:0 0 4px;color:#edf3fa;font-size:1.08rem;}
+.ai-tool-card .best-for{color:#7fe0a8;font-size:.82rem;font-weight:700;margin-bottom:10px;}
+.ai-tool-card p.desc{color:#93a3b7;font-size:.9rem;margin:0 0 16px;flex:1;}
+.ai-tool-card .primary-btn.inline-btn{margin-top:auto;text-align:center;}
+</style>
+</head><body data-page="ai"><header class="site-header"></header><main><div class="wrap">
+<section class="hero"><p class="eyebrow">AI TOOL DIRECTORY</p><h1>Which AI tool is actually best for what?</h1><p class="lede">Not every "AI tool" does the same job. Below is a category-by-category breakdown — writing, images, video, coding, research, productivity and business — with the top pick and the best alternatives for each, so you can pick the right tool instead of the most popular one.</p></section>
+
+<div class="ad-slot" data-ad="top"></div>
+
+<nav class="ai-jump" aria-label="Jump to category">
+  <a href="#cat-writing">Writing &amp; Content</a>
+  <a href="#cat-images">Image Generation</a>
+  <a href="#cat-video">Video</a>
+  <a href="#cat-coding">Coding</a>
+  <a href="#cat-research">Research &amp; Studying</a>
+  <a href="#cat-audio">Audio &amp; Voice</a>
+  <a href="#cat-productivity">Productivity &amp; Meetings</a>
+  <a href="#cat-business">Business &amp; Marketing</a>
+</nav>
+
+<section class="ai-category" id="cat-writing">
+  <div class="ai-category-head"><h2>Writing &amp; Content</h2></div>
+  <p class="ai-category-blurb">For emails, blog posts, social copy, editing and brainstorming.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">✎</div><h3>ChatGPT</h3><div class="best-for">Best for: general writing &amp; brainstorming</div><p class="desc">The most versatile all-rounder — drafts emails, blog posts, social copy and outlines quickly, and is good at adapting tone when you ask for it. The best starting point if you only use one AI tool for writing.</p><a class="primary-btn inline-btn" data-ai-key="chatgpt" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✦</div><h3>Claude</h3><div class="best-for">Best for: long-form &amp; document reasoning</div><p class="desc">Stronger at holding context across long documents and nuanced instructions — useful for reports, detailed rewrites, or reasoning through a document rather than just generating short copy.</p><a class="primary-btn inline-btn" data-ai-key="claude" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✓</div><h3>Grammarly</h3><div class="best-for">Best for: polishing what you already wrote</div><p class="desc">Not a generator — a refinement layer. Catches grammar, adjusts tone, and tightens sentences inside your existing drafts, emails and documents as you type.</p><a class="primary-btn inline-btn" data-ai-key="grammarly" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-images">
+  <div class="ai-category-head"><h2>Image Generation &amp; Design</h2></div>
+  <p class="ai-category-blurb">For creating original images from a text prompt, and turning them into finished designs.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">◈</div><h3>Midjourney</h3><div class="best-for">Best for: highest-quality generated images</div><p class="desc">Generally considered the strongest for artistic, highly polished AI-generated images from a text prompt — illustrations, concept art, stylized visuals. Runs through Discord or its own web app rather than a traditional editor.</p><a class="primary-btn inline-btn" data-ai-key="midjourney" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✺</div><h3>Adobe Firefly</h3><div class="best-for">Best for: commercially safe generated images</div><p class="desc">Trained with clearer commercial-use licensing in mind, and integrates directly into Photoshop/Illustrator — a good choice when you need generated or edited images for client or business work.</p><a class="primary-btn inline-btn" data-ai-key="firefly" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">▦</div><h3>Canva</h3><div class="best-for">Best for: turning images into finished designs</div><p class="desc">Its own "Magic Media" AI image generator is decent, but Canva's real strength is taking any generated image and turning it into a finished presentation, social post or poster with templates.</p><a class="primary-btn inline-btn" data-ai-key="canva" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-video">
+  <div class="ai-category-head"><h2>Video</h2></div>
+  <p class="ai-category-blurb">For generating new video clips versus editing footage you already have.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">▶</div><h3>Runway</h3><div class="best-for">Best for: generating new video from text/images</div><p class="desc">One of the most capable tools for generating original video clips from a text prompt or a still image, plus AI video effects (green-screen, slow-motion, object removal) — this is generation, not editing existing footage.</p><a class="primary-btn inline-btn" data-ai-key="runway" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✂</div><h3>CapCut</h3><div class="best-for">Best for: fast social-video editing</div><p class="desc">Best when you already have footage and need it cut, captioned and styled quickly for Reels/Shorts/TikTok — auto-captions, templates and AI effects built for short-form social video.</p><a class="primary-btn inline-btn" data-ai-key="capcut" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">≋</div><h3>Descript</h3><div class="best-for">Best for: transcript-based editing</div><p class="desc">Edit video and audio by editing the text transcript — delete a sentence in the transcript and it cuts the matching clip. Strong for podcasts, talking-head videos and interview edits.</p><a class="primary-btn inline-btn" data-ai-key="descript" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-coding">
+  <div class="ai-category-head"><h2>Coding &amp; Development</h2></div>
+  <p class="ai-category-blurb">For writing, completing, explaining and debugging code.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">⌘</div><h3>GitHub Copilot</h3><div class="best-for">Best for: in-editor code completion</div><p class="desc">Lives directly inside your editor and suggests code as you type — the fastest way to speed up everyday coding, boilerplate and repetitive patterns without leaving your IDE.</p><a class="primary-btn inline-btn" data-ai-key="copilot" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✦</div><h3>Claude</h3><div class="best-for">Best for: larger, multi-file reasoning</div><p class="desc">Better suited to reasoning through an entire codebase, architecture decisions, or a tricky multi-step refactor — not just line-by-line completion.</p><a class="primary-btn inline-btn" data-ai-key="claude" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✎</div><h3>ChatGPT</h3><div class="best-for">Best for: debugging &amp; explaining code</div><p class="desc">Good for pasting an error and getting a plain-language explanation, generating quick scripts, or explaining unfamiliar code you're reading for the first time.</p><a class="primary-btn inline-btn" data-ai-key="chatgpt" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-research">
+  <div class="ai-category-head"><h2>Research &amp; Studying</h2></div>
+  <p class="ai-category-blurb">For finding sources, working with your own documents, and understanding new topics.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">⌕</div><h3>Perplexity</h3><div class="best-for">Best for: cited, up-to-date web research</div><p class="desc">Answers come with linked sources and pull from current web results, which makes it easier to verify claims than a standard chatbot — a strong first stop for "what's the current state of X".</p><a class="primary-btn inline-btn" data-ai-key="perplexity" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">▤</div><h3>NotebookLM</h3><div class="best-for">Best for: working with your own sources</div><p class="desc">You upload your own documents, notes or PDFs and it answers questions grounded only in that material — useful for studying a specific textbook or your own research notes without the model wandering off-source.</p><a class="primary-btn inline-btn" data-ai-key="notebooklm" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✦</div><h3>ChatGPT</h3><div class="best-for">Best for: explaining concepts &amp; Q&amp;A studying</div><p class="desc">Good at breaking a complex topic into a simpler explanation, generating practice questions, or walking through a concept step by step at your own pace.</p><a class="primary-btn inline-btn" data-ai-key="chatgpt" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-audio">
+  <div class="ai-category-head"><h2>Audio &amp; Voice</h2></div>
+  <p class="ai-category-blurb">For generating spoken voice, versus transcribing and editing existing audio.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">🔊</div><h3>ElevenLabs</h3><div class="best-for">Best for: realistic AI-generated voice</div><p class="desc">Widely regarded as producing some of the most natural-sounding generated speech and voice cloning — the go-to when you need a script read aloud in a realistic voice for a video or app.</p><a class="primary-btn inline-btn" data-ai-key="elevenlabs" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">≋</div><h3>Descript</h3><div class="best-for">Best for: podcast &amp; interview editing</div><p class="desc">Combines transcription with editing (and its own AI voice tools like filler-word removal), making it well suited to cleaning up spoken recordings, not just generating new speech.</p><a class="primary-btn inline-btn" data-ai-key="descript" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">🎙</div><h3>Otter</h3><div class="best-for">Best for: live meeting transcription</div><p class="desc">Built specifically for joining live calls/meetings, transcribing them in real time, and producing a searchable summary afterward — different from editing pre-recorded audio.</p><a class="primary-btn inline-btn" data-ai-key="otter" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-productivity">
+  <div class="ai-category-head"><h2>Productivity &amp; Meetings</h2></div>
+  <p class="ai-category-blurb">For organizing notes, planning, and getting through meetings.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">▤</div><h3>Notion AI</h3><div class="best-for">Best for: writing inside your workspace</div><p class="desc">Built directly into Notion's docs, wikis and databases, so it can draft, summarize or reorganize content without you switching apps — best if your notes already live in Notion.</p><a class="primary-btn inline-btn" data-ai-key="notion" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">🎙</div><h3>Otter</h3><div class="best-for">Best for: meeting transcription &amp; notes</div><p class="desc">Joins your calls, transcribes them live, and gives you a searchable summary with action items afterward — saves you from manual note-taking during meetings.</p><a class="primary-btn inline-btn" data-ai-key="otter" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">✎</div><h3>ChatGPT</h3><div class="best-for">Best for: planning &amp; quick drafting</div><p class="desc">Handy for turning a rough plan into a structured to-do list, drafting a quick message, or summarizing a long thread before you reply.</p><a class="primary-btn inline-btn" data-ai-key="chatgpt" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<section class="ai-category" id="cat-business">
+  <div class="ai-category-head"><h2>Business &amp; Marketing</h2></div>
+  <p class="ai-category-blurb">For marketing copy, strategy documents, and turning ideas into visual assets.</p>
+  <div class="ai-tool-grid">
+    <article class="ai-tool-card top-pick"><span class="top-pick-badge">Top pick</span><div class="ai-tool-icon">✎</div><h3>ChatGPT</h3><div class="best-for">Best for: marketing copy &amp; strategy writing</div><p class="desc">A strong general choice for ad copy, positioning statements, business plans and internal strategy documents — flexible enough for most business-writing tasks.</p><a class="primary-btn inline-btn" data-ai-key="chatgpt" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">▦</div><h3>Canva</h3><div class="best-for">Best for: marketing assets &amp; presentations</div><p class="desc">Turns a marketing idea into a finished social post, pitch deck or ad creative quickly, with AI-assisted design tools and brand kit support.</p><a class="primary-btn inline-btn" data-ai-key="canva" href="#">Try this tool</a></article>
+    <article class="ai-tool-card"><div class="ai-tool-icon">⌕</div><h3>Perplexity</h3><div class="best-for">Best for: market &amp; competitor research</div><p class="desc">Good for quickly pulling current, cited information on a competitor, market trend or industry statistic before you write a strategy document.</p><a class="primary-btn inline-btn" data-ai-key="perplexity" href="#">Try this tool</a></article>
+  </div>
+</section>
+
+<div class="ad-slot" data-ad="middle"></div>
+
+<section class="tool-panel"><h2>Affiliate setup</h2><p>Every "Try this tool" button above reads its URL from <code>AI_AFFILIATE_LINKS</code> inside <code>site.js</code> (keys: <code>chatgpt</code>, <code>claude</code>, <code>grammarly</code>, <code>copilot</code>, <code>canva</code>, <code>firefly</code>, <code>capcut</code>, <code>descript</code>, <code>perplexity</code>, <code>notebooklm</code>, <code>notion</code>, <code>otter</code>, <code>midjourney</code>, <code>runway</code>, <code>elevenlabs</code>). Fill in a URL and the button becomes a live affiliate link; leave it empty and the button clearly shows "Affiliate link not added yet" instead of sending visitors to a broken link.</p></section>
+</div>
+<section class="content-card seo-guide"><h2>Choosing an AI tool</h2><p>AI tools are useful for different jobs: writing, coding, research, design, image and video generation, voice, and productivity. Instead of choosing a tool because it is popular, compare the task you need to complete, output quality, privacy options, pricing, usage limits and how easily the tool fits your workflow.</p><p>When using AI for important work, review the output yourself. AI-generated answers can contain errors, unsupported claims or outdated information.</p><h2>How to evaluate an AI service</h2><p>Start with a small real task and measure the result. Check whether the service stores prompts or uploaded files, whether business data is protected, and whether commercial-use rights match your needs.</p><h2>Frequently asked questions</h2><p><strong>Is one AI tool best for everyone?</strong> No. Different tools have different strengths, pricing and privacy models — that's why this page is organized by task rather than a single ranked list.</p><p><strong>Should AI output be trusted without review?</strong> No. Verify important facts and review generated code, documents or recommendations before using them.</p></section>
+<div class="wrap"><div class="ad-slot" data-ad="incontent"></div></div>
+</main><footer class="site-footer"></footer>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const links=window.AI_AFFILIATE_LINKS||{};
+  document.querySelectorAll('a[data-ai-key]').forEach(a=>{
+    const key=a.dataset.aiKey;
+    const href=(links[key]||'').trim();
+    if(href){ a.href=href; a.target='_blank'; a.rel='nofollow sponsored noopener'; }
+    else { a.href='#'; a.removeAttribute('target'); a.textContent='Affiliate link not added yet'; a.addEventListener('click',e=>e.preventDefault()); }
+  });
+});
+</script>
+<script src="site.js"></script></body></html>

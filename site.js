@@ -2,9 +2,10 @@
    No external fonts/CDNs are required. Put affiliate/ad URLs here. */
 window.AI_AFFILIATE_LINKS = {
   chatgpt: "", claude: "", grammarly: "", copilot: "", canva: "", firefly: "",
-  capcut: "", descript: "", perplexity: "", notebooklm: "", notion: "", otter: ""
+  capcut: "", descript: "", perplexity: "", notebooklm: "", notion: "", otter: "",
+  midjourney: "", runway: "", elevenlabs: ""
 };
-window.AD_URLS = { top: "PASTE_TOP_AD_URL_HERE", middle: "PASTE_MIDDLE_AD_URL_HERE", bottom: "PASTE_BOTTOM_AD_URL_HERE" };
+window.AD_URLS = { top: "PASTE_TOP_AD_URL_HERE", middle: "PASTE_MIDDLE_AD_URL_HERE", incontent: "PASTE_INCONTENT_AD_URL_HERE", bottom: "PASTE_BOTTOM_AD_URL_HERE" };
 // Add your real AdSense publisher ID after Google approves/connects the site. Example: ca-pub-1234567890123456
 window.ADSENSE_PUBLISHER_ID = "ca-pub-4992795020210826";
 // Paste your YouTube channel URL here. Individual video URLs can be pasted on videos.html.
@@ -21,6 +22,7 @@ const NAV = [
   {label:'Developer', href:'api-tools.html', menu:[['API Tools','api-tools.html'],['File Converter','file-converter.html']]},
   {label:'Testing', href:'testing-tools.html'},
   {label:'Career', href:'career-tools.html', menu:[['Career Tools','career-tools.html'],['Resume Builder','resume-builder.html']]},
+  {label:'Loans', href:'loans.html', menu:[['All Loans','loans.html'],['Home Loan','home-loan.html'],['Car Loan','car-loan.html'],['Bike Loan','bike-loan.html'],['Personal Loan','personal-loan.html'],['Education Loan','education-loan.html']]},
   {label:'Credit Cards', href:'credit-cards.html'},
   {label:'Islamic', href:'islamic-tools.html'},
   {label:'Videos', href:'videos.html'}
@@ -105,7 +107,7 @@ function renderAdSlots(){
   document.querySelectorAll('.ad-slot[data-ad]').forEach(slot=>{
     const key=slot.dataset.ad||'top',url=String(AD_URLS[key]||'').trim();
     if(!url || url.startsWith('PASTE_')){
-      slot.innerHTML=`<div class="ad-placeholder"><strong>Advertisement</strong><span>Paste your ad link in <code>site.js</code> → AD_URLS.${key}</span></div>`;
+      slot.innerHTML=`<div class="ad-placeholder" title="Set AD_URLS.${key} in site.js to enable this ad slot"><strong>Advertisement space</strong><span>Reserved for a future ad placement</span></div>`;
       return;
     }
     if(!isHttpUrl(url)){
@@ -119,7 +121,7 @@ function renderAdSlots(){
     const d=document.createElement('div'); d.className='wrap'; d.innerHTML='<div class="ad-slot" data-ad="bottom"></div>';
     footer.parentNode.insertBefore(d,footer);
     const s=d.querySelector('.ad-slot'),url=String(AD_URLS.bottom||'').trim();
-    if(!url || url.startsWith('PASTE_')) s.innerHTML=`<div class="ad-placeholder"><strong>Advertisement</strong><span>Paste your ad link in <code>site.js</code> → AD_URLS.bottom</span></div>`;
+    if(!url || url.startsWith('PASTE_')) s.innerHTML=`<div class="ad-placeholder" title="Set AD_URLS.bottom in site.js to enable this ad slot"><strong>Advertisement space</strong><span>Reserved for a future ad placement</span></div>`;
     else if(isHttpUrl(url)) renderAdContent(s,'bottom',url);
   }
 }
@@ -134,7 +136,7 @@ function openTool(key){
   const k=String(key).toLowerCase().replace(/[^a-z0-9]+/g,'-');
   const defs={
     'tasbeeh':()=>showTool('Tasbeeh Counter','<div class="tasbeeh-count" id="count">0</div><div class="action-row" style="justify-content:center"><button class="primary-btn" id="plus">+1</button><button class="secondary-btn" id="minus">−1</button><button class="secondary-btn" id="reset">Reset</button></div><div class="field"><label for="target">Target</label><input id="target" type="number" min="1" value="33"></div><div class="output-box" id="out">0 / 33</div>',b=>{let c=0;const out=()=>{const t=Math.max(1,+b.querySelector('#target').value||33);b.querySelector('#count').textContent=c;b.querySelector('#out').textContent=`${c} / ${t}${c>=t?' • Target reached':''}`};b.querySelector('#plus').onclick=()=>{c++;out()};b.querySelector('#minus').onclick=()=>{c=Math.max(0,c-1);out()};b.querySelector('#reset').onclick=()=>{c=0;out()};b.querySelector('#target').oninput=out;out()}),
-    'zakat':()=>showTool('Zakat Calculator','<div class="tool-grid-compact">'+field('Cash & bank balances (₹)','cash','number','0','min="0" step="0.01"')+field('Gold/silver & eligible assets (₹)','assets','number','0','min="0" step="0.01"')+field('Business/investment assets (₹)','business','number','0','min="0" step="0.01"')+field('Eligible short-term debts (₹)','debts','number','0','min="0" step="0.01"')+'</div><button class="primary-btn" id="go">Calculate estimated zakat</button><div class="output-box" id="out"></div><p class="small-note">This is a simple 2.5% estimate. Nisab, asset eligibility and debt treatment can vary; consult a qualified scholar for your circumstances.</p>',b=>b.querySelector('#go').onclick=()=>{const n=Math.max(0,...['cash','assets','business'].map(id=>+b.querySelector('#'+id).value||0).reduce((a,v)=>a+v,0)- (+b.querySelector('#debts').value||0));b.querySelector('#out').textContent=`Zakatable amount: ₹${n.toFixed(2)}\nEstimated zakat (2.5%): ₹${(n*.025).toFixed(2)}`}),
+    'zakat':()=>showTool('Zakat Calculator','<div class="tool-grid-compact">'+field('Cash & bank balances (₹)','cash','number','0','min="0" step="0.01"')+field('Gold/silver & eligible assets (₹)','assets','number','0','min="0" step="0.01"')+field('Business/investment assets (₹)','business','number','0','min="0" step="0.01"')+field('Eligible short-term debts (₹)','debts','number','0','min="0" step="0.01"')+'</div><button class="primary-btn" id="go">Calculate estimated zakat</button><div class="output-box" id="out"></div><p class="small-note">This is a simple 2.5% estimate. Nisab, asset eligibility and debt treatment can vary; consult a qualified scholar for your circumstances.</p>',b=>b.querySelector('#go').onclick=()=>{const total=['cash','assets','business'].map(id=>+b.querySelector('#'+id).value||0).reduce((a,v)=>a+v,0);const n=Math.max(0,total-(+b.querySelector('#debts').value||0));b.querySelector('#out').textContent=`Zakatable amount: ₹${n.toFixed(2)}\nEstimated zakat (2.5%): ₹${(n*.025).toFixed(2)}`}),
     'hijri':()=>showTool('Hijri / Gregorian Helper','<div class="field"><label for="date">Gregorian date</label><input id="date" type="date"></div><button class="primary-btn" id="go">Convert</button><div class="output-box" id="out"></div><p class="small-note">Browser calendar support varies. Religious dates can differ by moon sighting and local authority.</p>',b=>{b.querySelector('#date').value=new Date().toISOString().slice(0,10);b.querySelector('#go').onclick=()=>{const d=b.querySelector('#date').valueAsDate;if(!d){b.querySelector('#out').textContent='Select a date.';return}b.querySelector('#out').textContent=d.toLocaleDateString(undefined,{dateStyle:'full'})}}),
     'prayer':()=>showTool('Prayer Times Helper','<div class="field"><label for="city">City</label><input id="city" value="Mumbai"></div><div class="field"><label for="zone">Time zone</label><input id="zone" value="Asia/Kolkata"></div><div class="output-box" id="out">Enter your city and use your trusted local prayer-time source. This page intentionally avoids a network API so the website preview does not request external access.</div><button class="secondary-btn" id="open">Open search</button>',b=>b.querySelector('#open').onclick=()=>{const c=encodeURIComponent(b.querySelector('#city').value.trim()||'your city');window.open('https://www.google.com/search?q='+c+'+prayer+times','_blank','noopener')}),
     'qibla':()=>showTool('Qibla Helper','<div class="qibla-compass"><div class="qibla-arrow">↗</div><strong>Kaaba bearing</strong><span>From India, Qibla is generally toward the west / north-west depending on location.</span></div><div class="field"><label for="city">City</label><input id="city" value="Mumbai"></div><button class="secondary-btn" id="open">Search precise Qibla direction</button><p class="small-note">For precise direction, use a trusted Qibla app with device sensors and location.</p>',b=>b.querySelector('#open').onclick=()=>window.open('https://www.google.com/search?q='+encodeURIComponent((b.querySelector('#city').value||'your city')+' Qibla direction'),'_blank','noopener')),
@@ -144,8 +146,8 @@ function openTool(key){
     'hadith':()=>showTool('Hadith Resource','<p>Use a trusted Hadith library and verify references before publishing religious claims.</p><button class="primary-btn" id="open">Open Sunnah.com</button>',b=>b.querySelector('#open').onclick=()=>window.open('https://sunnah.com/','_blank','noopener')),
     'dua':()=>showTool('Daily Dua','<div class="output-box"><strong>Start your own verified Dua library here.</strong><br><br>Keep Arabic, transliteration, meaning and reference together. You can later replace this panel with your own Daily Duas content.</div>'),
     'islamic-videos':()=>window.location.href='videos.html',
-    'password':()=>showTool('Password Generator',field('Length','len','number','18','min="8" max="128"')+'<div class="action-row"><button class="primary-btn" id="gen">Generate password</button><button class="secondary-btn" id="copy">Copy</button></div><div class="output-box mono" id="out">Click Generate.</div>',b=>{b.querySelector('#gen').onclick=()=>{const n=Math.min(128,Math.max(8,+b.querySelector('#len').value||18));const chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=';let r='';const a=new Uint32Array(n);crypto.getRandomValues(a);for(let i=0;i<n;i++)r+=chars[a[i]%chars.length];b.querySelector('#out').textContent=r};b.querySelector('#copy').onclick=()=>navigator.clipboard?.writeText(b.querySelector('#out').textContent)}),
-    'uuid':()=>showTool('UUID Generator','<div class="action-row"><button class="primary-btn" id="gen">Generate UUID</button><button class="secondary-btn" id="copy">Copy</button></div><div class="output-box mono" id="out">Click Generate.</div>',b=>{const gen=()=>b.querySelector('#out').textContent=crypto.randomUUID?crypto.randomUUID():([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^(crypto.getRandomValues(new Uint8Array(1))[0]&15)>>c/4).toString(16));b.querySelector('#gen').onclick=gen;b.querySelector('#copy').onclick=()=>navigator.clipboard?.writeText(b.querySelector('#out').textContent);gen()}),
+    'password':()=>showTool('Password Generator',field('Length','len','number','18','min="8" max="128"')+'<div class="action-row"><button class="primary-btn" id="gen">Generate password</button><button class="secondary-btn" id="copy">Copy</button></div><div class="output-box mono" id="out">Click Generate.</div>',b=>{b.querySelector('#gen').onclick=()=>{const n=Math.min(128,Math.max(8,+b.querySelector('#len').value||18));const chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=';let r='';const a=new Uint32Array(n);crypto.getRandomValues(a);for(let i=0;i<n;i++)r+=chars[a[i]%chars.length];b.querySelector('#out').textContent=r};b.querySelector('#copy').onclick=()=>copyWithToast(b.querySelector('#out').textContent)}),
+    'uuid':()=>showTool('UUID Generator','<div class="action-row"><button class="primary-btn" id="gen">Generate UUID</button><button class="secondary-btn" id="copy">Copy</button></div><div class="output-box mono" id="out">Click Generate.</div>',b=>{const gen=()=>b.querySelector('#out').textContent=crypto.randomUUID?crypto.randomUUID():([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^(crypto.getRandomValues(new Uint8Array(1))[0]&15)>>c/4).toString(16));b.querySelector('#gen').onclick=gen;b.querySelector('#copy').onclick=()=>copyWithToast(b.querySelector('#out').textContent);gen()}),
     'jsonfmt':()=>showTool('JSON Formatter','<div class="field"><label for="input">JSON</label><textarea id="input">{"name":"All in One Place","tools":[]}</textarea></div><div class="action-row"><button class="primary-btn" id="go">Format</button><button class="secondary-btn" id="min">Minify</button></div><div class="output-box mono" id="out"></div>',b=>{const run=min=>{try{const v=JSON.parse(b.querySelector('#input').value);b.querySelector('#out').textContent=min?JSON.stringify(v):JSON.stringify(v,null,2)}catch(e){b.querySelector('#out').textContent='Invalid JSON: '+e.message}};b.querySelector('#go').onclick=()=>run(false);b.querySelector('#min').onclick=()=>run(true)}),
     'jsonvalid':()=>showTool('JSON Validator','<div class="field"><label for="input">JSON</label><textarea id="input"></textarea></div><button class="primary-btn" id="go">Validate</button><div class="output-box" id="out"></div>',b=>b.querySelector('#go').onclick=()=>{try{JSON.parse(b.querySelector('#input').value);b.querySelector('#out').textContent='✓ Valid JSON'}catch(e){b.querySelector('#out').textContent='✗ Invalid JSON: '+e.message}}),
     'base64':()=>showTool('Base64 Encoder / Decoder','<div class="field"><label for="input">Text</label><textarea id="input"></textarea></div><div class="action-row"><button class="primary-btn" id="enc">Encode</button><button class="secondary-btn" id="dec">Decode</button></div><div class="output-box mono" id="out"></div>',b=>{b.querySelector('#enc').onclick=()=>{try{b.querySelector('#out').textContent=btoa(unescape(encodeURIComponent(b.querySelector('#input').value)))}catch{b.querySelector('#out').textContent='Could not encode.'}};b.querySelector('#dec').onclick=()=>{try{b.querySelector('#out').textContent=decodeURIComponent(escape(atob(b.querySelector('#input').value.trim())))}catch{b.querySelector('#out').textContent='Invalid Base64.'}}}),
@@ -180,5 +182,34 @@ function openTool(key){
 }
 function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min)h=s=0;else{const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4}h/=6}return `${Math.round(h*360)}°, ${Math.round(s*100)}%, ${Math.round(l*100)}%`}
 function ensureCollectionBindings(){buttonToolHandlers();}
-function initSite(){renderHeader();renderFooter();loadAdSense();renderAdSlots();ensureCollectionBindings();}
+
+/* Shared toast — small confirmation feedback for actions like "Copy" that otherwise happen silently. */
+let toastTimer=null;
+function showToast(msg){
+  let t=document.querySelector('.site-toast');
+  if(!t){t=document.createElement('div');t.className='site-toast';t.setAttribute('role','status');t.setAttribute('aria-live','polite');document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
+}
+/* Wrap navigator.clipboard.writeText so every "Copy" button across the site gets the same toast feedback,
+   without having to edit each tool's handler individually. */
+function copyWithToast(text){
+  if(!navigator.clipboard?.writeText) return;
+  navigator.clipboard.writeText(text).then(()=>showToast('Copied to clipboard')).catch(()=>showToast('Could not copy — copy manually'));
+}
+
+/* Shared "back to top" button, added once and shown after the visitor has scrolled down a bit. */
+function ensureBackToTop(){
+  if(document.querySelector('.back-to-top')) return;
+  const btn=document.createElement('button');
+  btn.type='button';btn.className='back-to-top';btn.setAttribute('aria-label','Back to top');btn.innerHTML='↑';
+  btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  document.body.appendChild(btn);
+  const toggle=()=>btn.classList.toggle('show',window.scrollY>480);
+  window.addEventListener('scroll',toggle,{passive:true});
+  toggle();
+}
+
+function initSite(){renderHeader();renderFooter();loadAdSense();renderAdSlots();ensureCollectionBindings();ensureBackToTop();}
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initSite); else initSite();

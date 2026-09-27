@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — The Hearth</title>
+<meta name="description" content="The story of The Hearth, from a Sunday supper club to a neighbourhood restaurant.">
+<style>
+/* ============================================================
+   THE HEARTH — a free multi-page restaurant/café template
+   Palette: near-black olive + warm paper + brass + brick red
+   Type: Bitter (slab serif, headings) + Karla (body)
+   Layout principle: menu-board, not cards — hairline rules and
+   dot-leaders instead of rounded boxes and drop shadows.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;900&family=Karla:wght@400;500;700&display=swap');
+
+:root{
+  --bg: #12160F;
+  --bg-panel: #1B2117;
+  --paper: #F1ECDD;
+  --ink: #171512;
+  --ink-soft: #4A4438;
+  --accent: #D98E2B;
+  --accent-2: #7A2E2E;
+  --line: #33392C;
+  --line-paper: #D8CFB8;
+  --max: 1120px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'Karla', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3, h4{
+  font-family: 'Bitter', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 .4em;
+}
+a{ color: inherit; }
+img{ max-width: 100%; display: block; }
+.wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+/* ---------- header ---------- */
+.site-header{
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; background: var(--bg); z-index: 50;
+}
+.site-header .wrap{ display: flex; align-items: center; justify-content: space-between; height: 84px; }
+.brand{ font-family: 'Bitter', serif; font-weight: 900; font-size: 1.5rem; letter-spacing: .01em; text-decoration: none; color: var(--paper); }
+.brand span{ color: var(--accent); }
+.main-nav{ display: flex; gap: 28px; }
+.main-nav a{ text-decoration: none; color: var(--paper); font-weight: 500; font-size: .95rem; border-bottom: 1px solid transparent; padding-bottom: 4px; }
+.main-nav a:hover, .main-nav a.current{ border-bottom-color: var(--accent); }
+.nav-toggle{ display: none; background: none; border: 1px solid var(--line); color: var(--paper); padding: 8px 12px; border-radius: 4px; font-size: 1.1rem; }
+
+/* ---------- buttons ---------- */
+.btn{ display: inline-block; padding: 13px 26px; text-decoration: none; font-weight: 700; border: 1px solid var(--accent); color: var(--bg); background: var(--accent); font-family: 'Karla', sans-serif; }
+.btn:hover{ background: transparent; color: var(--accent); }
+.btn-outline{ background: transparent; color: var(--paper); border-color: var(--line); }
+.btn-outline:hover{ border-color: var(--paper); }
+
+/* ---------- hero ---------- */
+.hero{ padding: 90px 0 70px; border-bottom: 1px solid var(--line); }
+.hero-grid{ display: grid; grid-template-columns: 1.2fr .8fr; gap: 50px; align-items: end; }
+.hero .kicker{ color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+.hero h1{ font-size: clamp(2.4rem, 5vw, 3.6rem); max-width: 14ch; }
+.hero p.lede{ color: #C9C3B3; max-width: 46ch; font-size: 1.1rem; margin-top: 18px; }
+.hero-figure{ border: 1px solid var(--line); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; background: var(--bg-panel); color: var(--line); font-size: .85rem; text-align: center; padding: 20px; }
+
+/* ---------- sections on paper ---------- */
+.section-paper{ background: var(--paper); color: var(--ink); padding: 80px 0; }
+.section-paper h2{ color: var(--ink); }
+.section-dark{ padding: 80px 0; }
+.section-head{ max-width: 60ch; margin-bottom: 48px; }
+.section-head .kicker{ color: var(--accent-2); font-weight: 700; margin-bottom: 10px; }
+.section-paper .section-head .kicker{ color: var(--accent-2); }
+
+/* ---------- menu list (dot leaders, not cards) ---------- */
+.menu-list{ display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+.menu-group{ margin-bottom: 34px; }
+.menu-group h3{ font-size: 1.15rem; border-bottom: 1px solid var(--line-paper); padding-bottom: 10px; margin-bottom: 16px; }
+.menu-item{ display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+.menu-item .name{ font-weight: 700; white-space: nowrap; }
+.menu-item .fill{ flex: 1; border-bottom: 1px dotted var(--line-paper); position: relative; top: -4px; }
+.menu-item .price{ font-family: 'Bitter', serif; font-weight: 700; white-space: nowrap; }
+.menu-item .desc{ display: block; color: var(--ink-soft); font-size: .88rem; font-weight: 400; margin-top: 2px; }
+
+/* ---------- feature / three-up ---------- */
+.trio{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.trio-item h3{ font-size: 1.15rem; margin-bottom: 8px; }
+.trio-item .num{ font-family: 'Bitter', serif; color: var(--accent); font-size: .85rem; font-weight: 700; margin-bottom: 10px; }
+
+/* ---------- gallery ---------- */
+.gallery-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.gallery-grid .g{ aspect-ratio: 1; background: var(--bg-panel); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--line); font-size: .8rem; text-align: center; padding: 10px; }
+
+/* ---------- testimonial / quote ---------- */
+.quote{ border-left: 3px solid var(--accent); padding-left: 26px; font-family: 'Bitter', serif; font-size: 1.4rem; line-height: 1.4; max-width: 60ch; }
+.quote cite{ display: block; font-family: 'Karla', sans-serif; font-style: normal; font-size: .9rem; color: var(--ink-soft); margin-top: 14px; }
+
+/* ---------- FAQ ---------- */
+.faq-item{ border-bottom: 1px solid var(--line-paper); padding: 22px 0; }
+.faq-item h3{ font-size: 1.05rem; margin-bottom: 8px; }
+.faq-item p{ color: var(--ink-soft); margin: 0; max-width: 65ch; }
+
+/* ---------- form ---------- */
+.form-grid{ display: grid; gap: 16px; max-width: 520px; }
+.form-grid label{ display: block; font-size: .85rem; font-weight: 700; margin-bottom: 6px; }
+.form-grid input, .form-grid textarea, .form-grid select{ width: 100%; padding: 12px 14px; border: 1px solid var(--line-paper); background: #fff; font-family: inherit; font-size: 1rem; }
+.section-dark .form-grid input, .section-dark .form-grid textarea{ background: var(--bg-panel); border-color: var(--line); color: var(--paper); }
+
+/* ---------- blog list ---------- */
+.post-row{ display: flex; justify-content: space-between; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line-paper); }
+.post-row .meta{ color: var(--ink-soft); font-size: .85rem; margin-bottom: 6px; }
+.post-row h3{ font-size: 1.2rem; margin: 0 0 6px; }
+.post-row a{ text-decoration: none; }
+
+/* ---------- footer ---------- */
+.site-footer{ border-top: 1px solid var(--line); padding: 50px 0; }
+.footer-grid{ display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+.footer-grid h4{ font-size: .95rem; margin-bottom: 14px; }
+.footer-grid a{ display: block; text-decoration: none; color: #C9C3B3; padding: 5px 0; font-size: .92rem; }
+.footer-bottom{ margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: #7d7867; font-size: .85rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .trio{ grid-template-columns: 1fr; gap: 30px; }
+  .menu-list{ grid-template-columns: 1fr; }
+  .gallery-grid{ grid-template-columns: repeat(2, 1fr); }
+  .footer-grid{ grid-template-columns: 1fr; gap: 24px; }
+  .main-nav{ display: none; }
+  .nav-toggle{ display: inline-block; }
+  .main-nav.open{ display: flex; flex-direction: column; position: absolute; top: 84px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 16px 24px; gap: 4px; }
+}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">The <span>Hearth</span></a>
+    <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html" class="current">About</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="events.html">Events</a>
+    <a href="reservations.html">Reservations</a>
+    <a href="journal.html">Journal</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="section-dark" style="padding-top:60px;">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Since 2014</p>
+      <h1>Started as a Sunday supper club.</h1>
+      <p class="lede">The Hearth began as six tables and a wood oven our founder built herself in a rented garage kitchen. Twelve years later, the oven's the same one &mdash; everything around it grew to fit it.</p>
+    </div>
+    <div class="hero-figure">Photo: founder at the oven, 2014</div>
+  </div>
+</section>
+
+<section class="section-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">How we cook</p>
+      <h2>Three habits that haven't changed since day one</h2>
+    </div>
+    <div class="trio">
+      <div class="trio-item">
+        <h3>We call the farm, not a supplier</h3>
+        <p>Two family farms have supplied our produce since 2015. If they don't have it, it's not on the menu that week.</p>
+      </div>
+      <div class="trio-item">
+        <h3>Everyone cooks the fire shift</h3>
+        <p>Every cook on staff, including the head chef, still takes a turn on the wood oven each week.</p>
+      </div>
+      <div class="trio-item">
+        <h3>The menu changes before the season ends</h3>
+        <p>We'd rather rewrite a dish early than serve it past its best week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="wrap">
+    <blockquote class="quote">
+      "I didn't set out to open a restaurant. I set out to feed the same twelve people every Sunday, properly, and it just kept growing."
+      <cite>&mdash; Founder, The Hearth</cite>
+    </blockquote>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>The Hearth</h4>
+        <p style="color:#C9C3B3; max-width: 32ch; font-size:.92rem;">A neighbourhood table for slow mornings, long dinners, and everything in between. Open daily from 8am.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <a href="menu.html">Menu</a>
+        <a href="reservations.html">Reservations</a>
+        <a href="events.html">Private events</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="about.html">Our story</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Hearth. All rights reserved.</span>
+      <span>123 Mill Street, your city &middot; open 8am&ndash;10pm daily</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      nav.classList.toggle('open');
+    });
+  }
+});
+
+</script>
+</body>
+</html>

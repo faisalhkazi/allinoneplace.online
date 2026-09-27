@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Nordform</title>
+<meta name="description" content="How Nordform Studio prices residential, civic, and interiors projects.">
+<style>
+/* ============================================================
+   NORDFORM — a free multi-page studio/portfolio template
+   Palette: warm stone + ink + pine + clay
+   Type: Space Grotesk (headings) + Source Serif 4 (body) —
+   a geometric sans paired with a serif body, the inverse of the
+   usual "serif display / sans body" pattern.
+   Layout principle: sharp edges, a strict column grid, a rule
+   down the left of every content block instead of cards/shadows.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+:root{
+  --bg: #EAE7DE;
+  --panel: #DFDBCD;
+  --ink: #15140F;
+  --ink-soft: #55523F;
+  --accent: #3F5A44;
+  --accent-2: #9C5A3C;
+  --line: #C7C0AC;
+  --max: 1180px;
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.65;
+}
+h1, h2, h3, h4{
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0 0 .4em;
+}
+a{ color: inherit; }
+img{ max-width: 100%; display: block; }
+.wrap{ max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+/* ---------- header ---------- */
+.site-header{ border-bottom: 1px solid var(--ink); }
+.site-header .wrap{ display: flex; align-items: center; justify-content: space-between; height: 88px; }
+.brand{ font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; text-decoration: none; color: var(--ink); }
+.main-nav{ display: flex; gap: 30px; font-family: 'Space Grotesk', sans-serif; font-size: .92rem; }
+.main-nav a{ text-decoration: none; color: var(--ink); padding-bottom: 3px; border-bottom: 1px solid transparent; }
+.main-nav a:hover, .main-nav a.current{ border-bottom-color: var(--accent-2); }
+.nav-toggle{ display: none; background: none; border: 1px solid var(--ink); color: var(--ink); padding: 8px 12px; font-size: 1.1rem; }
+
+/* ---------- buttons ---------- */
+.btn{ display: inline-block; padding: 14px 28px; text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .92rem; background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
+.btn:hover{ background: transparent; color: var(--ink); }
+.btn-outline{ background: transparent; color: var(--ink); border-color: var(--ink); }
+
+/* ---------- hero ---------- */
+.hero{ padding: 100px 0 80px; border-bottom: 1px solid var(--line); }
+.hero .kicker{ font-family: 'Space Grotesk', sans-serif; color: var(--accent-2); font-weight: 700; font-size: .9rem; margin-bottom: 18px; }
+.hero h1{ font-size: clamp(2.6rem, 6vw, 4.4rem); max-width: 16ch; }
+.hero p.lede{ font-size: 1.2rem; max-width: 46ch; color: var(--ink-soft); margin-top: 22px; }
+
+/* ---------- ruled block: this template's signature device instead of cards ---------- */
+.ruled{ border-left: 2px solid var(--accent); padding-left: 28px; }
+.ruled-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.section{ padding: 90px 0; border-bottom: 1px solid var(--line); }
+.section-head{ display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; margin-bottom: 56px; align-items: start; }
+.section-head .kicker{ font-family: 'Space Grotesk', sans-serif; color: var(--accent-2); font-weight: 700; font-size: .9rem; }
+.section-head h2{ font-size: 2rem; margin: 0; }
+
+/* ---------- work / portfolio grid ---------- */
+.work-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--ink); border: 1px solid var(--ink); }
+.work-item{ background: var(--bg); padding: 40px; aspect-ratio: 4/3; display: flex; flex-direction: column; justify-content: flex-end; text-decoration: none; color: var(--ink); }
+.work-item .tag{ font-family: 'Space Grotesk', sans-serif; font-size: .8rem; color: var(--accent-2); margin-bottom: 8px; }
+.work-item h3{ font-size: 1.4rem; }
+
+/* ---------- pricing / plans as a table, not cards ---------- */
+.plan-table{ width: 100%; border-collapse: collapse; }
+.plan-table th, .plan-table td{ text-align: left; padding: 18px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.plan-table th{ font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
+.plan-table .price{ font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; }
+
+/* ---------- team ---------- */
+.team-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.team-item .photo{ aspect-ratio: 1; background: var(--panel); border: 1px solid var(--line); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: var(--ink-soft); font-size: .85rem; text-align: center; }
+.team-item h3{ font-size: 1.1rem; margin-bottom: 2px; }
+.team-item .role{ font-family: 'Space Grotesk', sans-serif; font-size: .85rem; color: var(--accent-2); }
+
+/* ---------- quote ---------- */
+.quote{ font-size: 1.6rem; max-width: 24ch; }
+.quote cite{ display: block; font-family: 'Space Grotesk', sans-serif; font-style: normal; font-size: .85rem; color: var(--ink-soft); margin-top: 18px; }
+
+/* ---------- FAQ ---------- */
+.faq-item{ border-bottom: 1px solid var(--line); padding: 24px 0; }
+.faq-item h3{ font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; margin-bottom: 8px; }
+.faq-item p{ color: var(--ink-soft); margin: 0; max-width: 65ch; }
+
+/* ---------- form ---------- */
+.form-grid{ display: grid; gap: 18px; max-width: 540px; }
+.form-grid label{ display: block; font-family: 'Space Grotesk', sans-serif; font-size: .82rem; font-weight: 700; margin-bottom: 6px; }
+.form-grid input, .form-grid textarea{ width: 100%; padding: 13px 14px; border: 1px solid var(--ink); background: var(--bg); font-family: inherit; font-size: 1rem; }
+
+/* ---------- journal / blog list ---------- */
+.post-row{ display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+.post-row .meta{ font-family: 'Space Grotesk', sans-serif; font-size: .85rem; color: var(--ink-soft); }
+.post-row h3{ font-size: 1.3rem; margin: 0 0 8px; }
+.post-row a{ text-decoration: none; }
+
+/* ---------- footer ---------- */
+.site-footer{ padding: 60px 0 40px; }
+.footer-grid{ display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+.footer-grid h4{ font-family: 'Space Grotesk', sans-serif; font-size: .9rem; margin-bottom: 14px; }
+.footer-grid a{ display: block; text-decoration: none; color: var(--ink-soft); padding: 4px 0; }
+.footer-bottom{ margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--ink); font-family: 'Space Grotesk', sans-serif; font-size: .82rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; color: var(--ink-soft); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px){
+  .section-head{ grid-template-columns: 1fr; }
+  .ruled-grid{ grid-template-columns: 1fr; gap: 30px; }
+  .work-grid{ grid-template-columns: 1fr; }
+  .team-grid{ grid-template-columns: 1fr; gap: 30px; }
+  .post-row{ grid-template-columns: 1fr; }
+  .footer-grid{ grid-template-columns: 1fr; gap: 24px; }
+  .main-nav{ display: none; }
+  .nav-toggle{ display: inline-block; }
+  .main-nav.open{ display: flex; flex-direction: column; position: absolute; top: 88px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--ink); padding: 16px 32px; gap: 4px; }
+}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Nordform</a>
+    <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">Studio</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Team</a>
+    <a href="pricing.html" class="current">Pricing</a>
+    <a href="journal.html">Journal</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="section" style="padding-top:60px;">
+  <div class="wrap">
+    <p class="kicker">How we price</p>
+    <h1>Pricing</h1>
+    <p class="lede" style="margin-top:14px;">A percentage of construction cost, on a sliding scale &mdash; the same structure for every project size.</p>
+  </div>
+</section>
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <table class="plan-table">
+      <tr><th>Stage</th><th>What's included</th><th>Fee</th></tr>
+      <tr><td>Concept design</td><td>Site analysis, initial massing, 2&ndash;3 design directions</td><td class="price">8%</td></tr>
+      <tr><td>Design development</td><td>Full drawings, material selections, engineering coordination</td><td class="price">6%</td></tr>
+      <tr><td>Construction admin</td><td>Site visits, contractor coordination, sign-off</td><td class="price">4%</td></tr>
+    </table>
+    <p style="margin-top:20px; color:var(--ink-soft);">Percentages are of total construction cost and typically total 15&ndash;18% across a full project. Civic and interiors-only projects are quoted separately &mdash; get in touch for a estimate.</p>
+    <a href="contact.html" class="btn" style="margin-top:20px;">Ask about your project</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Nordform</h4>
+        <p style="color:var(--ink-soft); max-width: 32ch;">An architecture and interiors studio working on quiet, material-first buildings across the region.</p>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="team.html">Team</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Nordform Studio</span>
+      <span>14 Foundry Lane, your city</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      nav.classList.toggle('open');
+    });
+  }
+});
+
+</script>
+</body>
+</html>

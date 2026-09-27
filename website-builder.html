@@ -1,0 +1,354 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Create Your Own Website | All in One Place</title><link rel="canonical" href="https://allinoneplace.online/website-builder.html"><meta name="description" content="Pick a template, choose your pages, set your business name and colors, and download a ready-to-edit multi-page website — free, in your browser.">
+<meta property="og:type" content="website"><meta property="og:title" content="Create Your Own Website | All in One Place"><meta property="og:description" content="Pick a template, choose your pages, set your business name and colors, and download a ready-to-edit multi-page website — free, in your browser."><meta property="og:url" content="https://allinoneplace.online/website-builder.html"><meta property="og:site_name" content="All in One Place"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Create Your Own Website | All in One Place"><meta name="twitter:description" content="Pick a template, choose your pages, set your business name and colors, and download a ready-to-edit multi-page website — free, in your browser."><link rel="stylesheet" href="site.css"><meta name="google-adsense-account" content="ca-pub-4992792502210826">
+<style>
+.wb-step{background:#171b2a;border:1px solid #2b3150;border-radius:14px;padding:26px 28px;margin-bottom:20px}
+.wb-step h2{font-size:1.15rem;margin:0 0 16px;display:flex;align-items:center;gap:12px;color:#f1f3f7!important}
+.wb-step h2 .n{background:#5b8cf9;color:#0b0e1a;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;flex:none}
+.wb-step > p{color:#9aa2c0}
+.wb-tmpl-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wb-tmpl-card{border:2px solid #2b3150;border-radius:12px;padding:18px;cursor:pointer;background:#12162238;transition:.15s ease}
+.wb-tmpl-card:hover{border-color:#3d4570}
+.wb-tmpl-card.selected{border-color:#5b8cf9;background:#223058}
+.wb-tmpl-card h3{margin:0 0 6px;font-size:1.05rem;color:#f1f3f7!important}
+.wb-tmpl-card p{margin:0;color:#9aa2c0;font-size:.9rem}
+.wb-pages{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+.wb-pages label{display:flex;align-items:center;gap:10px;font-size:.95rem;padding:8px 10px;border-radius:8px;color:#f1f3f7}
+.wb-pages label:hover{background:#1d2236}
+.wb-pages input[type=checkbox]{width:17px;height:17px;accent-color:#5b8cf9}
+.wb-field{margin-bottom:16px}
+.wb-field label{display:block;font-size:.85rem;color:#9aa2c0;margin-bottom:6px;font-weight:600}
+.wb-field input{width:100%;padding:11px 13px;border:1px solid #2b3150;border-radius:8px;font-size:.95rem;background:#0e1120;color:#f1f3f7}
+.wb-field input::placeholder{color:#5c6488}
+.wb-field input:focus{outline:2px solid #5b8cf9;outline-offset:1px;border-color:#5b8cf9}
+.wb-theme-row{display:flex;gap:12px;flex-wrap:wrap}
+.wb-swatch{border:2px solid #2b3150;border-radius:10px;padding:11px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:.88rem;color:#f1f3f7;background:#12162238;transition:.15s ease}
+.wb-swatch:hover{border-color:#3d4570}
+.wb-swatch.selected{border-color:#5b8cf9;background:#223058}
+.wb-swatch .dots{display:flex;gap:4px}
+.wb-swatch .dot{width:17px;height:17px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.wb-generate-btn{background:linear-gradient(135deg,#3478f6,#5b8cf9);color:#fff;border:0;border-radius:9px;padding:15px 30px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(52,120,246,.25)}
+.wb-generate-btn:hover{filter:brightness(1.08)}
+.wb-generate-btn:disabled{background:#454b66;cursor:wait;box-shadow:none}
+#wb-status{margin-top:14px;font-size:.9rem;color:#9aa2c0}
+</style>
+<style>
+/* This page's hero/status text sits on the site's own dark hero background,
+   so it needs light text explicitly — the site's global heading rule already
+   forces this, but we set it here too so this page never depends on rules
+   defined elsewhere for its own readability. */
+body[data-page="website-builder"] .hero p.lede{color:#d7dceb!important}
+</style>
+</head><body data-page="website-builder"><header class="site-header"></header><main><div class="wrap">
+
+<section class="hero"><p class="eyebrow">ALL IN ONE PLACE</p><h1>Create Your Own Website</h1><p class="lede">Pick a template, choose which pages you want, set your business name and colors, then download a ready-to-edit website — nothing leaves your browser, no account needed.</p></section>
+<div class="ad-slot" data-ad="top"></div>
+
+<div class="wb-step">
+  <h2><span class="n">1</span> Choose a starting point</h2>
+  <div class="wb-tmpl-row" id="wb-tmpl-row"></div>
+</div>
+
+<div class="wb-step">
+  <h2><span class="n">2</span> Choose your pages</h2>
+  <p style="color:#6b7280;font-size:.9rem;margin-top:-6px;">Home and a not-found page are always included.</p>
+  <div class="wb-pages" id="wb-pages"></div>
+</div>
+
+<div class="wb-step">
+  <h2><span class="n">3</span> Your details</h2>
+  <div class="wb-field"><label for="wb-name">Business / site name</label><input type="text" id="wb-name" placeholder="e.g. Riverside Kitchen"></div>
+  <div class="wb-field"><label for="wb-email">Contact email (optional — replaces the sample email)</label><input type="email" id="wb-email" placeholder="hello@yourbusiness.com"></div>
+  <div class="wb-field"><label for="wb-phone">Phone (optional — replaces the sample phone number)</label><input type="text" id="wb-phone" placeholder="(555) 123-4567"></div>
+</div>
+
+<div class="wb-step">
+  <h2><span class="n">4</span> Choose a color theme</h2>
+  <div class="wb-theme-row" id="wb-theme-row"></div>
+</div>
+
+<div class="wb-step">
+  <h2><span class="n">5</span> Download</h2>
+  <button type="button" class="wb-generate-btn" id="wb-generate">Generate &amp; download my website</button>
+  <div id="wb-status"></div>
+</div>
+
+<div class="ad-slot" data-ad="middle"></div>
+</div></main><footer class="site-footer"><div class="wrap"><p>All in One Place — useful tools, calculators and resources.</p></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="site.js"></script>
+<script>
+(function(){
+'use strict';
+
+var TEMPLATES = {
+  hearth: {
+    name: "The Hearth",
+    tagline: "Restaurant &amp; caf\u00e9 \u2014 11 pages",
+    slug: "the-hearth",
+    brandToken: "The Hearth",
+    emailToken: "hello@thehearth-example.com",
+    phoneToken: "(555) 019-2837",
+    always: ["index.html", "404.html"],
+    optional: [
+      {id:"menu", file:"menu.html", label:"Menu"},
+      {id:"about", file:"about.html", label:"About"},
+      {id:"gallery", file:"gallery.html", label:"Gallery"},
+      {id:"events", file:"events.html", label:"Events"},
+      {id:"reservations", file:"reservations.html", label:"Reservations"},
+      {id:"journal", file:["journal.html","journal-post.html"], label:"Journal / Blog"},
+      {id:"faq", file:"faq.html", label:"FAQ"},
+      {id:"contact", file:"contact.html", label:"Contact"}
+    ],
+    themes: [
+      {name:"Brass & Brick", accent:"#D98E2B", accent2:"#7A2E2E"},
+      {name:"Sage & Rust", accent:"#8A9B6E", accent2:"#B3552E"},
+      {name:"Ocean & Copper", accent:"#3E7C8C", accent2:"#C97A3E"},
+      {name:"Plum & Gold", accent:"#8C4A6B", accent2:"#D9A544"},
+      {name:"Forest & Clay", accent:"#4C6B4F", accent2:"#A8622E"}
+    ]
+  },
+  nordform: {
+    name: "Nordform",
+    tagline: "Architecture &amp; studio \u2014 11 pages",
+    slug: "nordform",
+    brandToken: "Nordform",
+    emailToken: "studio@nordform-example.com",
+    phoneToken: "(555) 042-8871",
+    always: ["index.html", "404.html"],
+    optional: [
+      {id:"work", file:"work.html", label:"Work / Portfolio"},
+      {id:"about", file:"about.html", label:"About / Studio"},
+      {id:"services", file:"services.html", label:"Services"},
+      {id:"team", file:"team.html", label:"Team"},
+      {id:"pricing", file:"pricing.html", label:"Pricing"},
+      {id:"journal", file:["journal.html","journal-post.html"], label:"Journal / Blog"},
+      {id:"faq", file:"faq.html", label:"FAQ"},
+      {id:"contact", file:"contact.html", label:"Contact"}
+    ],
+    themes: [
+      {name:"Pine & Clay", accent:"#3F5A44", accent2:"#9C5A3C"},
+      {name:"Slate & Rust", accent:"#46586B", accent2:"#B3552E"},
+      {name:"Moss & Copper", accent:"#5C6B3F", accent2:"#C97A3E"},
+      {name:"Charcoal & Gold", accent:"#3A3A3A", accent2:"#C9A227"},
+      {name:"Indigo & Terracotta", accent:"#3E4C7C", accent2:"#C1502E"}
+    ]
+  },
+  juno: {
+    name: "Juno Frame",
+    tagline: "Photographer &amp; portfolio \u2014 11 pages",
+    slug: "juno-frame",
+    brandToken: "Juno Frame",
+    emailToken: "hello@junoframe-example.com",
+    phoneToken: "(555) 271-4409",
+    always: ["index.html", "404.html"],
+    optional: [
+      {id:"portfolio", file:["portfolio.html","series.html"], label:"Portfolio"},
+      {id:"about", file:"about.html", label:"About"},
+      {id:"services", file:"services.html", label:"Services"},
+      {id:"press", file:"press.html", label:"Press"},
+      {id:"journal", file:["journal.html","journal-post.html"], label:"Journal / Blog"},
+      {id:"faq", file:"faq.html", label:"FAQ"},
+      {id:"contact", file:"contact.html", label:"Contact"}
+    ],
+    themes: [
+      {name:"Coral & Ink", accent:"#FF6B4A", accent2:"#8A8578"},
+      {name:"Amber & Slate", accent:"#E8A33D", accent2:"#5C6470"},
+      {name:"Rose & Stone", accent:"#D46A8C", accent2:"#8A8578"},
+      {name:"Teal & Sand", accent:"#3E8C82", accent2:"#B0A483"},
+      {name:"Violet & Ash", accent:"#8B6BD4", accent2:"#6B6B6B"}
+    ]
+  },
+  basket: {
+    name: "Basket & Bloom",
+    tagline: "Small shop &amp; e-commerce \u2014 11 pages",
+    slug: "basket-and-bloom",
+    brandToken: "Basket & Bloom",
+    emailToken: "hello@basketandbloom-example.com",
+    phoneToken: "",
+    always: ["index.html", "404.html"],
+    optional: [
+      {id:"shop", file:["shop.html","product.html"], label:"Shop"},
+      {id:"cart", file:"cart.html", label:"Cart"},
+      {id:"about", file:"about.html", label:"About"},
+      {id:"shipping", file:"shipping.html", label:"Shipping & Returns"},
+      {id:"journal", file:["journal.html","journal-post.html"], label:"Journal / Blog"},
+      {id:"faq", file:"faq.html", label:"FAQ"},
+      {id:"contact", file:"contact.html", label:"Contact"}
+    ],
+    themes: [
+      {name:"Forest & Rose", accent:"#3F6B4A", accent2:"#C97C74"},
+      {name:"Sage & Berry", accent:"#7C8F5E", accent2:"#A85C6B"},
+      {name:"Ocean & Clay", accent:"#3E6B7C", accent2:"#C9906A"},
+      {name:"Plum & Honey", accent:"#6B4C6B", accent2:"#D9A544"},
+      {name:"Slate & Coral", accent:"#4C5A6B", accent2:"#D4776A"}
+    ]
+  },
+  ironclad: {
+    name: "Ironclad",
+    tagline: "Gym &amp; fitness \u2014 11 pages",
+    slug: "ironclad-fitness",
+    brandToken: "Ironclad",
+    emailToken: "train@ironclad-example.com",
+    phoneToken: "(555) 604-2291",
+    always: ["index.html", "404.html"],
+    optional: [
+      {id:"classes", file:"classes.html", label:"Class Schedule"},
+      {id:"trainers", file:"trainers.html", label:"Trainers"},
+      {id:"membership", file:"membership.html", label:"Membership"},
+      {id:"about", file:"about.html", label:"About"},
+      {id:"gallery", file:"gallery.html", label:"Gallery"},
+      {id:"journal", file:["journal.html","journal-post.html"], label:"Journal / Blog"},
+      {id:"faq", file:"faq.html", label:"FAQ"},
+      {id:"contact", file:"contact.html", label:"Contact"}
+    ],
+    themes: [
+      {name:"Lime & Black", accent:"#D8FF3E", accent2:"#8C8C86"},
+      {name:"Cyan & Black", accent:"#3EE8FF", accent2:"#8C8C86"},
+      {name:"Orange & Black", accent:"#FF7A3E", accent2:"#8C8C86"},
+      {name:"Magenta & Black", accent:"#FF3EAE", accent2:"#8C8C86"},
+      {name:"White & Black", accent:"#F5F5F0", accent2:"#8C8C86"}
+    ]
+  }
+};
+
+var state = { tmpl: 'hearth', theme: 0 };
+
+function escapeHtml(s){ return s.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+function escapeReg(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function replaceAll(str, find, repl){ return str.split(find).join(repl); }
+
+function renderTemplateChoices(){
+  var row = document.getElementById('wb-tmpl-row');
+  row.innerHTML = '';
+  Object.keys(TEMPLATES).forEach(function(key){
+    var t = TEMPLATES[key];
+    var card = document.createElement('div');
+    card.className = 'wb-tmpl-card' + (state.tmpl === key ? ' selected' : '');
+    card.innerHTML = '<h3>' + t.name + '</h3><p>' + t.tagline + '</p>';
+    card.addEventListener('click', function(){
+      state.tmpl = key;
+      state.theme = 0;
+      renderTemplateChoices();
+      renderPageChoices();
+      renderThemeChoices();
+    });
+    row.appendChild(card);
+  });
+}
+
+function renderPageChoices(){
+  var wrap = document.getElementById('wb-pages');
+  wrap.innerHTML = '';
+  TEMPLATES[state.tmpl].optional.forEach(function(opt){
+    var label = document.createElement('label');
+    label.innerHTML = '<input type="checkbox" id="opt-' + opt.id + '" checked> ' + opt.label;
+    wrap.appendChild(label);
+  });
+}
+
+function renderThemeChoices(){
+  var row = document.getElementById('wb-theme-row');
+  row.innerHTML = '';
+  TEMPLATES[state.tmpl].themes.forEach(function(theme, i){
+    var el = document.createElement('div');
+    el.className = 'wb-swatch' + (state.theme === i ? ' selected' : '');
+    el.innerHTML = '<span class="dots"><span class="dot" style="background:' + theme.accent + '"></span><span class="dot" style="background:' + theme.accent2 + '"></span></span><span>' + theme.name + '</span>';
+    el.addEventListener('click', function(){
+      state.theme = i;
+      renderThemeChoices();
+    });
+    row.appendChild(el);
+  });
+}
+
+async function generate(){
+  var btn = document.getElementById('wb-generate');
+  var status = document.getElementById('wb-status');
+  btn.disabled = true;
+  status.textContent = 'Building your website\u2026';
+
+  try {
+    var tmpl = TEMPLATES[state.tmpl];
+    var theme = tmpl.themes[state.theme];
+    var siteName = document.getElementById('wb-name').value.trim() || tmpl.name;
+    var email = document.getElementById('wb-email').value.trim();
+    var phone = document.getElementById('wb-phone').value.trim();
+
+    var selectedIds = {};
+    var selectedFiles = tmpl.always.slice();
+    tmpl.optional.forEach(function(opt){
+      var checked = document.getElementById('opt-' + opt.id).checked;
+      selectedIds[opt.id] = checked;
+      if (checked) {
+        var files = Array.isArray(opt.file) ? opt.file : [opt.file];
+        files.forEach(function(f){ selectedFiles.push(f); });
+      }
+    });
+
+    var basePath = 'templates/' + tmpl.slug + '/';
+    var zip = new JSZip();
+
+    for (var i = 0; i < selectedFiles.length; i++) {
+      var file = selectedFiles[i];
+      var res = await fetch(basePath + file);
+      if (!res.ok) throw new Error('Could not load ' + file);
+      var html = await res.text();
+
+      html = replaceAll(html, tmpl.brandToken, escapeHtml(siteName));
+      if (email && tmpl.emailToken) html = replaceAll(html, tmpl.emailToken, escapeHtml(email));
+      if (phone && tmpl.phoneToken) html = replaceAll(html, tmpl.phoneToken, escapeHtml(phone));
+
+      // The header logo often splits the brand name across a <span> for
+      // styling (e.g. "The <span>Hearth</span>"), so the plain-text
+      // replace above never touches it. Replace the whole logo link's
+      // contents directly instead, so it always shows the real site name.
+      html = html.replace(
+        /(<a href="index\.html" class="brand">)[\s\S]*?(<\/a>)/,
+        '$1' + escapeHtml(siteName) + '$2'
+      );
+
+      // The template's CSS is embedded directly in each page's own <style>
+      // block (not a separate linked file), so the color theme has to be
+      // swapped inside that inline block, on every page individually.
+      html = html.replace(/--accent:\s*#[0-9A-Fa-f]{6};/, '--accent: ' + theme.accent + ';');
+      html = html.replace(/--accent-2:\s*#[0-9A-Fa-f]{6};/, '--accent-2: ' + theme.accent2 + ';');
+
+      // Remove every link to a page the user chose not to include — this
+      // covers the header nav, the footer's own links, and any in-body
+      // link that happens to point to the same page, so the downloaded
+      // site never links to a file that isn't there.
+      tmpl.optional.forEach(function(opt){
+        if (!selectedIds[opt.id]) {
+          var firstFile = Array.isArray(opt.file) ? opt.file[0] : opt.file;
+          var linkRe = new RegExp('<a href="' + escapeReg(firstFile) + '"[^>]*>[^<]*<\\/a>\\s*', 'g');
+          html = html.replace(linkRe, '');
+        }
+      });
+
+      zip.file(file, html);
+    }
+
+    var blob = await zip.generateAsync({type:'blob'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (siteName || tmpl.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-website.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    status.textContent = 'Done \u2014 your website has been downloaded as a .zip. Unzip it and open index.html to see it.';
+  } catch (err) {
+    status.textContent = 'Something went wrong building your website: ' + err.message + '. Try again, or download the plain template from the Templates page instead.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+document.getElementById('wb-generate').addEventListener('click', generate);
+renderTemplateChoices();
+renderPageChoices();
+renderThemeChoices();
+})();
+</script>
+</body></html>

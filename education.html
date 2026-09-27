@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Test & Marks Sheet — Secure Classroom Quiz Tool | All in One Place</title><link rel="canonical" href="https://allinoneplace.online/education.html">
+<meta name="description" content="Create a quiz, share it with your students, and watch scores update live as they submit — with real teacher login and a real database behind it.">
+<meta property="og:type" content="website"><meta property="og:title" content="Live Test & Marks Sheet — Secure Classroom Quiz Tool | All in One Place"><meta property="og:description" content="Create a quiz, share it with your students, and watch scores update live as they submit — with real teacher login and a real database behind it."><meta property="og:url" content="https://allinoneplace.online/education.html"><meta property="og:site_name" content="All in One Place"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Live Test & Marks Sheet — Secure Classroom Quiz Tool | All in One Place"><meta name="twitter:description" content="Create a quiz, share it with your students, and watch scores update live as they submit — with real teacher login and a real database behind it.">
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --bg:#10131a; --bg2:#171b24; --card:#1b202b; --border:#2b3140; --border-hover:#3a4152;
+  --text:#f1f3f7; --muted:#9aa2b1; --accent:#3478f6; --accent-hover:#4c88f7;
+  --green:#3ecf8e; --amber:#f2b84b; --danger:#ff7a6e; --max-w:860px;
+}
+*{box-sizing:border-box}
+body[data-page="education"]{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,-apple-system,sans-serif;font-size:16px;line-height:1.55}
+body[data-page="education"] a{color:var(--accent)}
+body[data-page="education"] h1,body[data-page="education"] h2,body[data-page="education"] h3{font-family:'Trebuchet MS',sans-serif;font-weight:700;line-height:1.2;margin:0 0 .4em;color:var(--text)}
+body[data-page="education"] .wrap{max-width:var(--max-w)}
+.edu-hero{padding:38px 0 6px}
+.edu-hero .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.06em;font-size:.8rem;text-transform:uppercase}
+.edu-hero p.lede{color:var(--muted);max-width:62ch}
+
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin-bottom:20px}
+.edu-card h2{font-size:1.15rem}
+
+.edu-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,#132a1f,#12283a);border:1px solid #2a5b41;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.edu-cta h2{margin-bottom:6px}
+.edu-cta p{color:var(--muted);margin:0;max-width:44ch}
+.edu-btn{border:0;border-radius:9px;padding:12px 22px;font-weight:700;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block}
+.edu-btn-primary{background:linear-gradient(135deg,#3478f6,#5b8cf9);color:#fff;box-shadow:0 8px 18px rgba(52,120,246,.25)}
+.edu-btn-primary:hover{filter:brightness(1.08)}
+
+.edu-steps{list-style:none;margin:0;padding:0;counter-reset:edustep}
+.edu-steps li{counter-increment:edustep;position:relative;padding:6px 0 6px 40px;color:var(--muted)}
+.edu-steps li::before{content:counter(edustep);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--bg2);border:1px solid var(--border-hover);color:var(--text);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.edu-steps strong{color:var(--text)}
+
+.edu-security-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:600px){.edu-security-grid{grid-template-columns:1fr}}
+.edu-security-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.edu-security-item strong{display:block;margin-bottom:4px;color:var(--green)}
+.edu-security-item span{color:var(--muted);font-size:.9rem}
+
+.edu-setup-note{background:#2a2416;border:1px solid #5b4a2a;border-radius:12px;padding:16px 18px;color:#f2d19b;font-size:.92rem}
+.edu-setup-note code{background:#1a1710;padding:2px 6px;border-radius:5px;font-size:.85em}
+.edu-hidden{display:none !important}
+</style>
+<script src="site.js" defer></script>
+</head>
+<body data-page="education">
+<header class="site-header"></header>
+
+<main>
+  <div class="wrap edu-hero">
+    <div class="eyebrow">EDUCATION • LIVE TEST & MARKS</div>
+    <h1>Live Test & Marks Sheet</h1>
+    <p class="lede">Create a quiz, share it with your students, and watch every submission update the marks sheet the moment it happens — automatically graded, with real teacher login and a real database behind it.</p>
+  </div>
+
+  <div class="wrap"><div class="ad-slot page-ad-top ad-wide" data-ad="top"></div></div>
+
+  <div class="wrap">
+
+    <div class="edu-cta">
+      <div>
+        <h2>Open the app</h2>
+        <p>Teachers log in, create and publish a test, and watch results come in live. Students log in with the details their teacher gives them.</p>
+      </div>
+      <a class="edu-btn edu-btn-primary" id="eduOpenApp" href="#" target="_blank" rel="noopener">Open the Live Test & Marks App →</a>
+    </div>
+
+    <div class="edu-card edu-hidden" id="eduSetupCard">
+      <h2>One-time setup (site owner)</h2>
+      <div class="edu-setup-note">
+        This button isn't wired up yet. The Live Test &amp; Marks app is a small, separate service
+        (FastAPI + a real database) — it can't run as plain HTML/JS like the rest of this site's tools,
+        because a real teacher login and tamper-proof scores require a server that enforces the rules,
+        not just browser code that anyone can bypass with dev tools.
+        <br><br>
+        Deploy it once (see the app's own README for step-by-step Ubuntu/Nginx/HTTPS instructions), then
+        open <code>education.html</code> in this project and set <code>EDUCATION_APP_URL</code> near the
+        top of its script to your deployed URL, e.g. <code>https://app.allinoneplace.online</code>.
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <h2>How it works</h2>
+      <ol class="edu-steps">
+        <li><strong>Teacher</strong> signs up, creates a class, adds students, builds a test, and publishes it.</li>
+        <li><strong>Teacher</strong> shares each student's personal test link (or their username/password, if you'd rather they log in) — one link per student, copied straight from the live sheet.</li>
+        <li><strong>Student</strong> opens the link — no login, no account needed — and takes the test. It's graded automatically the instant they submit.</li>
+        <li><strong>Student</strong> sees a plain "Test submitted" finish page. The same link can't be opened again to retake it or see the quiz — it will only ever show that finish page from then on.</li>
+        <li><strong>Teacher</strong> watches the live marks sheet update in real time as each student finishes — no refresh needed.</li>
+      </ol>
+    </div>
+
+    <div class="edu-card">
+      <h2>Sharing a test with your class</h2>
+      <p style="color:var(--muted);margin-top:0">Once a test is published, the live marks sheet shows a <strong>Copy link</strong> button next to every student's name. That link is personal to that one student and that one test:</p>
+      <div class="edu-security-grid">
+        <div class="edu-security-item"><strong>No login needed</strong><span>Paste the link in a chat or message — opening it takes the student straight into the test, nothing else.</span></div>
+        <div class="edu-security-item"><strong>Nothing else on the page</strong><span>No menu, no way to browse anywhere else in the app — just that one test.</span></div>
+        <div class="edu-security-item"><strong>Locked after submission</strong><span>The same link permanently shows a plain finish page from then on — it can't be reopened to retake the test or replay answers.</span></div>
+        <div class="edu-security-item"><strong>Username/password still available</strong><span>Prefer students to log in instead? That option still works exactly as before, side by side with links.</span></div>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <h2>Why this needs real login (not just a code)</h2>
+      <p style="color:var(--muted);margin-top:0">An earlier version of this page tried to do all of this with only JavaScript in your browser. That can look like it works, but it can never actually be secure — anyone can open their browser's dev tools and read or edit anything running there. Real security has to live on a server you control:</p>
+      <div class="edu-security-grid">
+        <div class="edu-security-item"><strong>Real teacher login</strong><span>Passwords are hashed (bcrypt) and never stored in plain text; sessions use a signed token nobody can forge.</span></div>
+        <div class="edu-security-item"><strong>Ownership-checked everything</strong><span>A teacher can only ever see, publish, or delete their own classes and tests — enforced on every request, server-side.</span></div>
+        <div class="edu-security-item"><strong>Owner-only delete</strong><span>Deleting a test removes it and every recorded score from the database — and only the teacher who created it can do it.</span></div>
+        <div class="edu-security-item"><strong>A real, shared database</strong><span>Scores are recorded once, centrally — not scattered across each visitor's own browser storage, and not editable by students.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wrap"><div class="ad-slot page-ad-bottom ad-wide" data-ad="bottom"></div></div>
+</main>
+
+<footer class="site-footer"></footer>
+
+<script>
+(function(){
+  'use strict';
+  // Set this to your deployed Live Test & Marks app's URL once you've hosted it
+  // (see that project's README for deployment steps). Until then, this page
+  // shows setup instructions instead of a dead button.
+  var EDUCATION_APP_URL = "PASTE_YOUR_DEPLOYED_APP_URL_HERE";
+
+  var isConfigured = /^https?:\/\//i.test(EDUCATION_APP_URL);
+  var btn = document.getElementById('eduOpenApp');
+  if(isConfigured){
+    btn.href = EDUCATION_APP_URL;
+  } else {
+    btn.removeAttribute('href');
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+    btn.addEventListener('click', function(e){ e.preventDefault(); });
+    document.getElementById('eduSetupCard').classList.remove('edu-hidden');
+  }
+})();
+</script>
+</body>
+</html>

@@ -1249,3 +1249,186 @@ body[data-page="credit-cards"] main > .wrap:nth-of-type(2) .back-link{ color:#07
 .video-heart-cta p{ color:#4b5568 !important; }
 .video-heart-cta strong{ color:#172433 !important; }
 .video-heart-cta .heart-cta-note{ color:#667587 !important; }
+
+/* =========================================================
+   REAL PHOTO BACKGROUNDS (per category)
+   Replaces the old per-page line-art SVGs with the actual
+   category photos supplied by the team. Each photo is layered
+   under a light wash (matching the site's base #f7fafc tone)
+   so it reads as a soft, identifiable ambient backdrop per
+   page without ever competing with the dark body text that
+   sits directly on the page outside of white cards (.hero h1,
+   section labels, etc.). The wash strength is intentionally
+   high (88-96% opaque) because several of the source photos
+   are quite dark and would otherwise break text contrast in
+   areas that have no opaque card behind them.
+   ========================================================= */
+body[data-page="home"],
+body[data-page="about"],
+body[data-page="contact"],
+body[data-page="privacy"],
+body[data-page="terms"],
+body[data-page="disclaimer"],
+body[data-page="affiliate"],
+body[data-page="404"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.88) 0%, rgba(247,250,252,.92) 55%, rgba(247,250,252,.96) 100%),
+    url("assets/backgrounds/home.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="calculator"],
+body[data-page="bmi"],
+body[data-page="tip"],
+body[data-page="age"],
+body[data-page="percentage"],
+body[data-page="emi"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.90) 0%, rgba(247,250,252,.93) 55%, rgba(247,250,252,.96) 100%),
+    url("assets/backgrounds/calculators.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="credit-cards"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/credit-cards.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="business"],
+body[data-page="gst"],
+body[data-page="profit"],
+body[data-page="markup"],
+body[data-page="break-even"],
+body[data-page="invoice"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.90) 0%, rgba(247,250,252,.93) 55%, rgba(247,250,252,.97) 100%),
+    url("assets/backgrounds/business.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="website-tools"],
+body[data-page="monitor"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/website-tools.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="api"],
+body[data-page="converter"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.90) 0%, rgba(247,250,252,.93) 55%, rgba(247,250,252,.97) 100%),
+    url("assets/backgrounds/developer.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="testing"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/testing.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="career"],
+body[data-page="resume"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/career.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="ai"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.90) 0%, rgba(247,250,252,.93) 55%, rgba(247,250,252,.97) 100%),
+    url("assets/backgrounds/ai-tools.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="islamic"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/islamic.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="videos"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.87) 0%, rgba(247,250,252,.91) 55%, rgba(247,250,252,.96) 100%),
+    url("assets/backgrounds/videos.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="loans"],
+body[data-page="home-loan"],
+body[data-page="car-loan"],
+body[data-page="bike-loan"],
+body[data-page="personal-loan"],
+body[data-page="education-loan"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/loans.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="education"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.85) 0%, rgba(247,250,252,.89) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/education.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="templates"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.85) 0%, rgba(247,250,252,.89) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/templates.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+body[data-page="website-builder"]{
+  background-image:
+    linear-gradient(180deg, rgba(247,250,252,.86) 0%, rgba(247,250,252,.90) 55%, rgba(247,250,252,.95) 100%),
+    url("assets/backgrounds/website-builder.jpg") !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-attachment:fixed, fixed !important;
+}
+
+/* Fixed-attachment backgrounds are costly/janky on mobile browsers,
+   and the existing site already disables it below 760px elsewhere —
+   follow the same convention for these new photo backgrounds. */
+@media (max-width:760px){
+  body[data-page]{
+    background-attachment:scroll, scroll !important;
+  }
+}

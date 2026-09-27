@@ -1036,3 +1036,216 @@ body[data-page="business"] .ad-slot{
   margin-top:12px !important;
   margin-bottom:12px !important;
 }
+
+
+/* =========================================================
+   REFINED CORNER ACCENT (replaces the grid + noise texture)
+   The grid texture read as busy/unprofessional. This swaps it
+   for a quiet, minimal ring motif — no text, no clip-art, no
+   photography — anchored to two corners only (top-right and
+   bottom-left) so it never sits behind body text or cards,
+   however long a page is or however it's scrolled. Pure CSS,
+   additive only: overrides just background-image on the same
+   ::after layer already used above.
+   ========================================================= */
+body::after{
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='380' height='380'><circle cx='190' cy='190' r='170' fill='none' stroke='white' stroke-width='1' opacity='0.14'/><circle cx='190' cy='190' r='125' fill='none' stroke='white' stroke-width='1' opacity='0.10'/><circle cx='190' cy='190' r='80' fill='none' stroke='white' stroke-width='1' opacity='0.08'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='380' height='380'><circle cx='190' cy='190' r='170' fill='none' stroke='white' stroke-width='1' opacity='0.14'/><circle cx='190' cy='190' r='125' fill='none' stroke='white' stroke-width='1' opacity='0.10'/><circle cx='190' cy='190' r='80' fill='none' stroke='white' stroke-width='1' opacity='0.08'/></svg>") !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-position:top right, bottom left !important;
+  background-size:380px 380px, 380px 380px !important;
+  -webkit-mask-image:none !important;
+  mask-image:none !important;
+}
+@media (max-width:760px){
+  body::after{ background-size:220px 220px, 220px 220px !important; }
+}
+
+/* =========================================================
+   BRIGHT / PROFESSIONAL THEME (site owner request)
+   Restores a clean, light, professional look across the whole
+   site — white surfaces, dark readable text, a vibrant CTA
+   color — instead of the dark "2026 Professional Finish" theme
+   layered on earlier in this file. Purely additive: every rule
+   here targets the exact same selectors that theme used, with
+   the same !important weight, later in the file, so it wins the
+   cascade without deleting or editing anything above.
+   ========================================================= */
+
+html{ background:#ffffff !important; }
+body{ background:#ffffff !important; color:#172433 !important; }
+body::before,body::after{ display:none !important; }
+main{ background:transparent !important; }
+
+/* Header / nav */
+.site-header{ background:rgba(255,255,255,.98) !important; box-shadow:0 4px 18px rgba(16,38,63,.06) !important; }
+.brand,.brand span,.brand small{ color:#172433 !important; }
+.brand small{ color:#667587 !important; }
+.site-nav>a,.nav-drop-btn{ color:#334155 !important; }
+.site-nav>a:hover,.site-nav>a.current,.nav-drop-btn:hover,.nav-drop-btn.current,.nav-drop-btn[aria-expanded="true"]{ background:#f1f5f9 !important; color:#0f172a !important; }
+.site-nav .home-button{ background:#e91e63 !important; color:#fff !important; box-shadow:0 6px 16px rgba(233,30,99,.25) !important; }
+.site-nav .home-button:hover{ background:#c2185b !important; color:#fff !important; }
+.nav-menu{ background:#fff !important; border-color:#e2e8f0 !important; box-shadow:0 20px 55px rgba(16,38,63,.15) !important; }
+.nav-menu a{ color:#334155 !important; }
+.nav-menu a:hover,.nav-menu a[aria-current="page"]{ background:#f1f5f9 !important; color:#0f172a !important; }
+.mobile-menu-btn{ background:#fff !important; border-color:#e2e8f0 !important; color:#172433 !important; }
+
+/* Typography */
+h1,h2,h3,.page-heading h1,.hero h1{ color:#172433 !important; }
+p,.page-heading p,.hero p.lede,.explainer p,.small-note{ color:#667587 !important; }
+.section-label{ color:#667587 !important; }
+.eyebrow,.back-link{ color:#07579a !important; }
+a{ color:#07579a !important; }
+
+/* Shared cards / panels used across every tool page */
+.card,.tool-card,.collection-card,.tool-panel,.disclosure,.credit-card,.explainer,.form-section,.resume-preview-wrap,.plan{
+  background:#ffffff !important;
+  border:1px solid #e2e8f0 !important;
+  box-shadow:0 10px 28px rgba(31,67,94,.08) !important;
+  color:#172433 !important;
+}
+.tool-card:hover,.collection-card:hover{ border-color:#9dc3df !important; box-shadow:0 15px 34px rgba(31,67,94,.12) !important; }
+.tool-card .name,.collection-card h3,.tool-panel h2,.about h2{ color:#172433 !important; }
+.tool-card .desc,.collection-card p,.about,.about p{ color:#667587 !important; }
+.tool-card .icon,.collection-icon{ color:#07579a !important; background:#eaf5ff !important; }
+
+/* Forms / controls across every tool */
+.field label,label{ color:#425668 !important; }
+input,textarea,select,.field input,.field select,.field textarea{
+  background:#ffffff !important; color:#172433 !important; border:1px solid #cbd9e5 !important;
+}
+input::placeholder,textarea::placeholder{ color:#94a3b8 !important; }
+input:focus,textarea:focus,select:focus{ border-color:#3f8ae0 !important; box-shadow:0 0 0 3px rgba(63,138,224,.14) !important; }
+.toggle-row button{ background:#f1f5f9 !important; color:#334155 !important; border:1px solid #cbd5e1 !important; }
+.toggle-row button.active{ background:#07579a !important; color:#fff !important; border-color:#07579a !important; }
+
+.primary-btn,.apply-btn{ background:#e91e63 !important; color:#fff !important; border:0 !important; box-shadow:0 8px 20px rgba(233,30,99,.22) !important; }
+.primary-btn:hover,.apply-btn:hover{ background:#c2185b !important; }
+.secondary-btn{ background:#ffffff !important; color:#07579a !important; border:1px solid #b9cfdf !important; }
+.secondary-btn:hover{ background:#f7fafc !important; color:#054a82 !important; border-color:#07579a !important; }
+
+.output-box,.solver-result,.result,.result-box{ background:#f7fafc !important; border-color:#e2e8f0 !important; color:#172433 !important; }
+.result{ border-top-color:#e2e8f0 !important; }
+.result-row .label{ color:#667587 !important; }
+.result-row .value{ color:#172433 !important; }
+.result-row.primary .value{ color:#07579a !important; }
+.tool-table th{ background:#f1f5f9 !important; color:#334155 !important; }
+.tool-table td{ border-bottom-color:#e2e8f0 !important; color:#334155 !important; }
+.badge{ background:#eaf5ff !important; color:#07579a !important; border:1px solid #b9cfdf !important; }
+
+/* Ads */
+.ad-slot{ background:rgba(255,255,255,.92) !important; border-color:#cbd5e1 !important; }
+.ad-slot .ad-frame{ background:#ffffff !important; }
+.ad-slot .ad-placeholder{ color:#667587 !important; }
+.ad-slot .ad-open{ background:#ffffff !important; color:#07579a !important; border-color:#b9cfdf !important; }
+
+/* Footer */
+.site-footer{ background:#f7fafc !important; border-top-color:#e2e8f0 !important; color:#667587 !important; }
+.site-footer a{ color:#07579a !important; }
+
+/* Homepage: hero, search, quick/category cards */
+.home-hero-compact{ background:#ffffff !important; border:1px solid #e2e8f0 !important; box-shadow:0 10px 30px rgba(31,67,94,.08) !important; }
+.home-kicker{ color:#07579a !important; }
+.home-best-badge{ background:#eaf5ff !important; border:1px solid #b9cfdf !important; color:#054a82 !important; }
+.home-hero-compact p{ color:#667587 !important; }
+.home-search-wrap{ background:#f7fafc !important; border:1px solid #e2e8f0 !important; }
+.home-search-wrap label{ color:#425668 !important; }
+.home-search{ background:#ffffff !important; border:1px solid #cbd9e5 !important; }
+.home-search span{ color:#07579a !important; }
+.home-hint{ color:#667587 !important; }
+
+.quick-card,.category-card{ background:#ffffff !important; border:1px solid #e2e8f0 !important; }
+.quick-card:hover,.category-card:hover{ border-color:#9dc3df !important; box-shadow:0 12px 26px rgba(31,67,94,.10) !important; }
+.quick-card strong,.category-card strong{ color:#172433 !important; }
+.quick-card small,.category-card small{ color:#667587 !important; }
+.category-card b{ color:#617a99 !important; }
+.quick-icon,.category-icon{ background:#eaf5ff !important; color:#07579a !important; border:1px solid #cfe4f7 !important; }
+.quick-card-featured{ border-color:#9dc3df !important; background:#f7fbff !important; }
+.quick-card-featured .quick-icon{ border-color:#9dc3df !important; }
+.category-featured{ border-color:#9dc3df !important; background:#f7fbff !important; }
+.no-tool-results{ border:1px dashed #cbd5e1 !important; color:#667587 !important; background:#f7fafc !important; }
+
+.home-info-card{ background:#ffffff !important; border:1px solid #e2e8f0 !important; }
+.home-info-card p{ color:#667587 !important; }
+.back-to-top{ background:#ffffff !important; border:1px solid #cbd5e1 !important; color:#07579a !important; }
+.back-to-top:hover{ background:#f1f5f9 !important; border-color:#9dc3df !important; color:#054a82 !important; }
+
+/* Round 2: selectors found on a full sweep after the first pass */
+.content-card{ background:#ffffff !important; border:1px solid #e2e8f0 !important; box-shadow:0 10px 28px rgba(31,67,94,.08) !important; }
+.content-card h2{ color:#172433 !important; }
+.content-card p,.content-card li{ color:#425668 !important; }
+.content-card a{ color:#07579a !important; }
+.contact-email{ color:#172433 !important; }
+.trust-links a{ color:#07579a !important; }
+.trust-links a:hover{ color:#054a82 !important; }
+.site-footer .footer-brand{ color:#172433 !important; }
+.site-footer .footer-copy{ color:#667587 !important; }
+.site-footer .footer-links a{ color:#425668 !important; }
+.site-footer .footer-links a:hover{ color:#07579a !important; }
+.site-footer .footer-note{ color:#8496a8 !important; border-top-color:#e2e8f0 !important; }
+.adsense-slot{ background:rgba(247,250,252,.9) !important; border-color:#cbd5e1 !important; }
+.adsense-placeholder{ color:#667587 !important; }
+
+body[data-page="calculator"] .solver-panel,body[data-page="calculator"] .history-panel{ background:#ffffff !important; border-color:#e2e8f0 !important; }
+.status-badge{ background:#f1f5f9 !important; border-color:#cbd5e1 !important; color:#334155 !important; }
+.status-badge.ready{ background:#ecfdf5 !important; border-color:#86efac !important; color:#15803d !important; }
+button.status-badge.engine-retry{ background:#eaf5ff !important; border-color:#b9cfdf !important; color:#07579a !important; }
+.dropzone.drag{ background:#eaf5ff !important; border-color:#3f8ae0 !important; }
+.feature-card.no-setup .feature-icon{ background:#ecfdfa !important; color:#0d9488 !important; border-color:#99f6e4 !important; }
+.ad-preview-image,.ad-preview-card .ad-frame{ background:#f1f5f9 !important; }
+
+/* Page hero/heading banner (appears at the top of every non-home page) */
+.page-heading,.hero{ background:rgba(255,255,255,.85) !important; border:1px solid #e2e8f0 !important; box-shadow:0 10px 28px rgba(31,67,94,.08) !important; }
+.hero h1{ color:#172433 !important; }
+.hero p,.hero .lede{ color:#667587 !important; }
+
+/* Scientific calculator: bright console to match the rest of the site */
+body[data-page="calculator"] .calculator-card{ background:#ffffff !important; border-color:#e2e8f0 !important; box-shadow:0 18px 45px rgba(31,67,94,.12) !important; }
+body[data-page="calculator"] .calc-display{ background:#0e1424 !important; border-color:#26384d !important; }
+body[data-page="calculator"] .calc-expression{ color:#8294a8 !important; }
+body[data-page="calculator"] .calc-current{ color:#f5f8fc !important; }
+body[data-page="calculator"] .calc-grid button{ background:#f1f5f9 !important; color:#172433 !important; box-shadow:none !important; }
+body[data-page="calculator"] .calc-grid button:hover{ background:#e2e8f0 !important; }
+body[data-page="calculator"] .calc-grid .accent{ background:#07579a !important; color:#fff !important; }
+body[data-page="calculator"] .calc-grid .warm{ color:#b45309 !important; }
+body[data-page="calculator"] .calc-grid .inv-on{ background:#dbeafe !important; color:#07579a !important; }
+body[data-page="calculator"] .maths-solver{ border-top-color:#e2e8f0 !important; }
+body[data-page="calculator"] .solver-toggle{ background:#f1f5f9 !important; color:#172433 !important; }
+body[data-page="calculator"] .solver-panel,body[data-page="calculator"] .history-panel{ background:#f7fafc !important; border-color:#e2e8f0 !important; }
+body[data-page="calculator"] .history-list button{ background:#ffffff !important; color:#172433 !important; border:1px solid #e2e8f0 !important; }
+body[data-page="calculator"] .history-list button:hover{ background:#f1f5f9 !important; }
+
+/* Credit cards page: heading banner uses its own selector, not .hero */
+body[data-page="credit-cards"] main > .wrap:nth-of-type(2){
+  background:#ffffff !important; border:1px solid #e2e8f0 !important; box-shadow:0 10px 28px rgba(31,67,94,.08) !important;
+}
+body[data-page="credit-cards"] main > .wrap:nth-of-type(2) h1{ color:#172433 !important; }
+body[data-page="credit-cards"] main > .wrap:nth-of-type(2) .lede{ color:#667587 !important; }
+body[data-page="credit-cards"] main > .wrap:nth-of-type(2) .back-link{ color:#07579a !important; }
+
+/* File converter page */
+.dropzone{ background:#f7fafc !important; border:2px dashed #b9cfdf !important; }
+.dropzone.drag{ border-color:#07579a !important; background:#eaf5ff !important; }
+.dropzone h2{ color:#172433 !important; }
+.feature-card{ background:#ffffff !important; border:1px solid #e2e8f0 !important; border-top:3px solid #e2e8f0 !important; box-shadow:0 10px 28px rgba(31,67,94,.08) !important; }
+.feature-card h3{ color:#172433 !important; }
+.feature-card p{ color:#667587 !important; }
+.feature-card.office-pdf{ border-top-color:#ef5b5b !important; }
+.feature-card.office-pdf .feature-icon{ background:#fef2f2 !important; color:#dc2626 !important; border-color:#fecaca !important; }
+.feature-card.fallback-format{ border-top-color:#e8c76b !important; }
+.feature-card.fallback-format .feature-icon{ background:#fefce8 !important; color:#b45309 !important; border-color:#fde68a !important; }
+.conversion-grid>div{ background:#ffffff !important; border-color:#e2e8f0 !important; border-left:3px solid #e2e8f0 !important; }
+.conversion-grid strong{ color:#172433 !important; }
+.conversion-grid p{ color:#667587 !important; }
+
+/* .ad-slot's own direct text color (separate from .ad-placeholder, already fixed) */
+.ad-slot{ color:#667587 !important; }
+
+/* Videos page: heartfelt YouTube CTA banner */
+.video-heart-cta{ background:linear-gradient(135deg,#eef2ff,#e0e7ff) !important; border:1px solid #c7d2fe !important; box-shadow:0 10px 28px rgba(31,67,94,.08) !important; }
+.heart-cta-kicker{ color:#4c51bf !important; }
+.video-heart-cta h2{ color:#172433 !important; }
+.video-heart-cta p{ color:#4b5568 !important; }
+.video-heart-cta strong{ color:#172433 !important; }
+.video-heart-cta .heart-cta-note{ color:#667587 !important; }
